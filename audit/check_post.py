@@ -117,6 +117,10 @@ claim("faq mde", f"about {m(P.loc['state, pre-period mean base', 'mde_80'])} per
 claim("bottom line", f"spent {a(S.loc[HEAD, 'post_att'], 1)} to {a(S.loc[POPM, 'post_att'], 1)} percent less after the cut")
 claim("quick range", f"run from {s(S.loc[LOW, 'post_att'], 1)} to {m(S.loc[POPM, 'post_att'], 1)} log points depending on the comparison states")
 claim("quick border", f"estimate is {m(Bd.loc[BH, 'post_att'], 1)} to {m(Bd.loc[BPOP, 'post_att'], 1)} log points with wide intervals")
+# the short version at the top
+claim("short head", f"ran about {a(S.loc[HEAD, 'post_att'], 1)} percent lower ({a(S.loc[POP, 'post_att'], 1)} percent when states are weighted by population)")
+claim("short implied", f"close to the {a(M['implied_pct_pce'], 1)} to {a(M['implied_pct_cardable'], 1)} percent the bank data imply")
+claim("short mde", f"could reliably detect is about {a(P.loc['state, pre-period mean base', 'mde_80'])} percent, larger than the effect itself")
 # the null of every placebo distribution should be centered (the round-4 kernel bug would show here)
 off = S[S.null_mean.abs() > 0.1]
 assert off.empty, f"placebo null not centered: {off.null_mean.to_dict()}"

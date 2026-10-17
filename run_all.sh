@@ -9,6 +9,7 @@ python3 state_analysis.py
 python3 border.py
 python3 power.py
 python3 figs.py
+python3 fig_summary.py
 cd ../audit
 python3 tests.py
 python3 size_test.py

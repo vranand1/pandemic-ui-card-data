@@ -4,7 +4,7 @@ title: "Ending Pandemic Unemployment Benefits Early: What Public Card Data Can a
 date: 2026-10-17 09:00 -0400
 description: "Coombs, Dube and coauthors found a 20 percent spending drop among workers who lost pandemic unemployment benefits in 2021. I test whether public card data show it, with a staggered difference-in-differences across 48 states, 140 border-county pairs and a power calculation. The answer depends on which states you compare against, and the data cannot tell the two readings apart."
 tags: [causal inference, difference-in-differences, border discontinuity, unemployment insurance, consumer spending, card data, statistical power]
-image: /assets/images/ui-withdrawal-specifications.png
+image: /assets/images/ui-withdrawal-summary.png
 faq:
   - q: "What did Coombs, Dube and coauthors find about ending pandemic unemployment benefits early?"
     a: "In bank-account data on low-income workers who were receiving unemployment insurance in 2021, ending federal benefits early cut benefits by $278 a week, raised employment by 4.4 percentage points, raised earnings by only $14 a week and cut spending by $145 a week, about 20 percent (August 2021 working paper). The published 2022 version reports employment and earnings only."
@@ -17,6 +17,15 @@ faq:
 In June and July 2021, 26 states announced they would stop paying federal pandemic unemployment benefits two to three months before they expired nationally, and 24 carried it through. Kyle Coombs, Arindrajit Dube and four coauthors followed 18,648 benefit recipients, in cutting and retaining states, through their bank accounts and found a large, fast drop in spending where benefits ended. This post asks a narrower question: can anyone see that drop in the public card data that analysts, journalists and policy teams work with every week?
 
 The answer turns out to depend on a choice that is easy to make without noticing, which states you compare against. Working out why, and what the data could have shown under either choice, is the useful part.
+
+## The short version
+
+- **The question.** In 2021, 24 states ended federal pandemic unemployment benefits early. Bank-account data showed that the people who lost them cut spending by about 20 percent. Can the public card data that analysts use every week see that drop?
+- **The answer: not reliably.** Against all 24 states that kept benefits, card spending in the cutting states ran about 0.3 percent lower (0.6 percent when states are weighted by population), close to the 0.4 to 0.7 percent the bank data imply. Against states with similar unemployment levels, the gap was about zero.
+- **Why.** The people affected were a few percent of all spenders. The smallest effect state-level card data could reliably detect is about 0.75 percent, larger than the effect itself, so the data could not settle the question before any estimate was run.
+- **What I take from it.** Check what a dataset can detect before relying on either a null or a hit. Check who is in the comparison group, because it can be the whole answer. And questions about a small group need data at that group's level, such as cardholder panels, which a payments network has and public data do not.
+
+<img src="/assets/images/ui-withdrawal-summary.png" alt="Summary chart: against all states that kept benefits, the estimated drop in card spending sits near the 0.4 to 0.7 percent the bank data imply; against states with similar unemployment it is about zero; all four intervals are wide, and the implied effect lies inside the range too small for state data to detect reliably">
 
 ## What the bank data showed
 

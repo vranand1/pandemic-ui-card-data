@@ -53,7 +53,7 @@ spending data show that drop at the level of states and counties, and if not, wh
 - `src/state_panel.py`, `src/state_analysis.py`: state panel and specification grid.
 - `src/border.py`: county pairs, border estimator, exposure split.
 - `src/power.py`: implied effect and minimum detectable effects.
-- `src/figs.py`: charts in `fig/`.
+- `src/figs.py`, `src/fig_summary.py`: charts in `fig/` (the second draws the summary chart at the top of the post).
 - `post/`: the blog post.
 - `run_all.sh`: reproduces everything (about 25 minutes; randomization inference is the slow part).
 
