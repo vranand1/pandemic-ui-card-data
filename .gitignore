@@ -1,0 +1,12 @@
+# data: raw downloads are re-fetched by get_data.sh
+data/raw/
+*.csv.gz
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+_to_delete/
+.ipynb_checkpoints/
+PROFILE_README_for_vranand1.md
+REFEREE_PROMPT.md
+out_author/
