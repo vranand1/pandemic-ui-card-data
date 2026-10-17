@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ending Pandemic Unemployment Benefits Early: What Public Card Data Can and Can't See"
-date: 2026-10-17 18:00 -0400
+date: 2026-10-17 09:00 -0400
 description: "Coombs, Dube and coauthors found a 20 percent spending drop among workers who lost pandemic unemployment benefits in 2021. I test whether public card data show it, with a staggered difference-in-differences across 48 states, 140 border-county pairs and a power calculation. The answer depends on which states you compare against, and the data cannot tell the two readings apart."
 tags: [causal inference, difference-in-differences, border discontinuity, unemployment insurance, consumer spending, card data, statistical power]
 image: /assets/images/ui-withdrawal-specifications.png
