@@ -1,0 +1,442 @@
+spec,e,att
+"claims, g-1 base",-12,-0.06380555555555562
+"claims, g-1 base",-11,0.009041666666666559
+"claims, g-1 base",-10,-0.07668750000000003
+"claims, g-1 base",-9,0.0857604166666666
+"claims, g-1 base",-8,-0.13846527777777792
+"claims, g-1 base",-7,-0.06726388888888894
+"claims, g-1 base",-6,-0.1553819444444444
+"claims, g-1 base",-5,0.07932638888888888
+"claims, g-1 base",-4,0.03316666666666662
+"claims, g-1 base",-3,0.22313541666666661
+"claims, g-1 base",-2,0.2533368055555556
+"claims, g-1 base",-1,0.0
+"claims, g-1 base",0,-1.2104236111111113
+"claims, g-1 base",1,-1.2453159722222218
+"claims, g-1 base",2,-1.378763888888889
+"claims, g-1 base",3,-1.3888645833333333
+"claims, g-1 base",4,-1.3465243055555554
+"claims, g-1 base",5,-1.0708297101449276
+"claims, g-1 base",6,-1.176731884057971
+"claims, g-1 base",7,-1.207778985507246
+"claims, g-1 base",8,-1.254909090909091
+"claims, all-programs states",-12,-0.30667105263157896
+"claims, all-programs states",-11,-0.136122807017544
+"claims, all-programs states",-10,-0.20007017543859662
+"claims, all-programs states",-9,-0.004960526315789494
+"claims, all-programs states",-8,-0.22398245614035106
+"claims, all-programs states",-7,-0.13145614035087724
+"claims, all-programs states",-6,-0.1710087719298245
+"claims, all-programs states",-5,0.08730701754385961
+"claims, all-programs states",-4,0.06688596491228059
+"claims, all-programs states",-3,0.29832456140350866
+"claims, all-programs states",-2,0.32902192982456147
+"claims, all-programs states",-1,0.0
+"claims, all-programs states",0,-1.3994736842105262
+"claims, all-programs states",1,-1.37528947368421
+"claims, all-programs states",2,-1.4275087719298245
+"claims, all-programs states",3,-1.383486842105263
+"claims, all-programs states",4,-1.2714166666666666
+"claims, all-programs states",5,-1.1992719298245613
+"claims, all-programs states",6,-1.2799605263157894
+"claims, all-programs states",7,-1.3544561403508772
+"claims, all-programs states",8,-1.3517587719298243
+"claims, FPUC-only states",-12,0.8590833333333329
+"claims, FPUC-only states",-11,0.5606666666666669
+"claims, FPUC-only states",-10,0.39216666666666666
+"claims, FPUC-only states",-9,0.43049999999999977
+"claims, FPUC-only states",-8,0.18649999999999983
+"claims, FPUC-only states",-7,0.1766666666666668
+"claims, FPUC-only states",-6,-0.09600000000000009
+"claims, FPUC-only states",-5,0.04899999999999995
+"claims, FPUC-only states",-4,-0.09496666666666637
+"claims, FPUC-only states",-3,-0.06258333333333328
+"claims, FPUC-only states",-2,-0.0342666666666665
+"claims, FPUC-only states",-1,0.0
+"claims, FPUC-only states",0,-0.49203333333333354
+"claims, FPUC-only states",1,-0.7514166666666663
+"claims, FPUC-only states",2,-1.1935333333333333
+"claims, FPUC-only states",3,-1.4092999999999998
+"claims, FPUC-only states",4,-1.6319333333333332
+"claims, FPUC-only states",5,-0.46072916666666647
+"claims, FPUC-only states",6,-0.6863958333333333
+"claims, FPUC-only states",7,-0.5110625
+"claims, FPUC-only states",8,-0.6415277777777775
+"spend, g-1 base",-12,0.8341304067362104
+"spend, g-1 base",-11,0.1411130863769169
+"spend, g-1 base",-10,0.8505070722342047
+"spend, g-1 base",-9,-0.05616913263028167
+"spend, g-1 base",-8,0.44202102672818305
+"spend, g-1 base",-7,0.08725639230368924
+"spend, g-1 base",-6,-0.13268519605528162
+"spend, g-1 base",-5,-0.4485890274293232
+"spend, g-1 base",-4,0.05604447811493111
+"spend, g-1 base",-3,-0.472354001636291
+"spend, g-1 base",-2,0.03137581122073393
+"spend, g-1 base",-1,0.0
+"spend, g-1 base",0,-0.5008345890648296
+"spend, g-1 base",1,-0.3189524373300511
+"spend, g-1 base",2,-0.848685100653947
+"spend, g-1 base",3,0.2808033984826268
+"spend, g-1 base",4,-0.7124562069091467
+"spend, g-1 base",5,-0.506325513615249
+"spend, g-1 base",6,-0.02597881357836227
+"spend, g-1 base",7,-0.7849261013337255
+"spend, g-1 base",8,0.10359266388171023
+"spend, pre-period mean base",-12,0.8965490519866907
+"spend, pre-period mean base",-11,0.20353173162739732
+"spend, pre-period mean base",-10,0.9129257174846851
+"spend, pre-period mean base",-9,0.006249512620198461
+"spend, pre-period mean base",-8,0.5044396719786634
+"spend, pre-period mean base",-7,0.14967503755416958
+"spend, pre-period mean base",-6,-0.07026655080480117
+"spend, pre-period mean base",-5,-0.386170382178843
+"spend, pre-period mean base",-4,0.1184631233654113
+"spend, pre-period mean base",-3,-0.40993535638581036
+"spend, pre-period mean base",-2,0.09379445647121448
+"spend, pre-period mean base",-1,0.062418645250480485
+"spend, pre-period mean base",0,-0.43841594381434906
+"spend, pre-period mean base",1,-0.25653379207957105
+"spend, pre-period mean base",2,-0.7862664554034667
+"spend, pre-period mean base",3,0.3432220437331073
+"spend, pre-period mean base",4,-0.6500375616586664
+"spend, pre-period mean base",5,-0.44827062478417184
+"spend, pre-period mean base",6,0.0320760752527146
+"spend, pre-period mean base",7,-0.7268712125026486
+"spend, pre-period mean base",8,0.19482538782245024
+"spend, pre-announcement base (May 1)",-12,0.5250608428987683
+"spend, pre-announcement base (May 1)",-11,-0.16795647746052475
+"spend, pre-announcement base (May 1)",-10,0.5414375083967627
+"spend, pre-announcement base (May 1)",-9,-0.36523869646772367
+"spend, pre-announcement base (May 1)",-8,0.13295146289074136
+"spend, pre-announcement base (May 1)",-7,-0.22181317153375268
+"spend, pre-announcement base (May 1)",-6,-0.44175475989272295
+"spend, pre-announcement base (May 1)",-5,-0.7576585912667649
+"spend, pre-announcement base (May 1)",-4,-0.25302508572251076
+"spend, pre-announcement base (May 1)",-3,-0.7814235654737326
+"spend, pre-announcement base (May 1)",-2,-0.27769375261670753
+"spend, pre-announcement base (May 1)",-1,-0.30906956383744183
+"spend, pre-announcement base (May 1)",0,-0.8099041529022714
+"spend, pre-announcement base (May 1)",1,-0.6280220011674932
+"spend, pre-announcement base (May 1)",2,-1.1577546644913894
+"spend, pre-announcement base (May 1)",3,-0.028266165354814965
+"spend, pre-announcement base (May 1)",4,-1.0215257707465888
+"spend, pre-announcement base (May 1)",5,-0.7775932764567842
+"spend, pre-announcement base (May 1)",6,-0.29724657641989793
+"spend, pre-announcement base (May 1)",7,-1.056193864175261
+"spend, pre-announcement base (May 1)",8,-0.1819389516946065
+"spend, population-weighted, premean",-12,1.2627820795798874
+"spend, population-weighted, premean",-11,0.7431494352949609
+"spend, population-weighted, premean",-10,0.6176376067847462
+"spend, population-weighted, premean",-9,0.4318336751663267
+"spend, population-weighted, premean",-8,0.4448560300526954
+"spend, population-weighted, premean",-7,0.18942436763600937
+"spend, population-weighted, premean",-6,-0.41184372453459717
+"spend, population-weighted, premean",-5,-0.22591071165513746
+"spend, population-weighted, premean",-4,-0.06261422952456434
+"spend, population-weighted, premean",-3,-0.20087632215130205
+"spend, population-weighted, premean",-2,0.26696459017690044
+"spend, population-weighted, premean",-1,0.16753581550611854
+"spend, population-weighted, premean",0,-0.4372323478320761
+"spend, population-weighted, premean",1,-0.436733519589478
+"spend, population-weighted, premean",2,-0.45433154610009047
+"spend, population-weighted, premean",3,0.07336389074083556
+"spend, population-weighted, premean",4,-0.6923450936355257
+"spend, population-weighted, premean",5,-0.6619403737801111
+"spend, population-weighted, premean",6,-0.04324511242741394
+"spend, population-weighted, premean",7,-0.8634016137149068
+"spend, population-weighted, premean",8,-0.2031013490729576
+"spend, population-weighted, g-1",-12,1.0952462640737688
+"spend, population-weighted, g-1",-11,0.5756136197888425
+"spend, population-weighted, g-1",-10,0.45010179127862776
+"spend, population-weighted, g-1",-9,0.26429785966020797
+"spend, population-weighted, g-1",-8,0.2773202145465768
+"spend, population-weighted, g-1",-7,0.021888552129890826
+"spend, population-weighted, g-1",-6,-0.579379540040716
+"spend, population-weighted, g-1",-5,-0.3934465271612562
+"spend, population-weighted, g-1",-4,-0.23015004503068295
+"spend, population-weighted, g-1",-3,-0.3684121376574205
+"spend, population-weighted, g-1",-2,0.09942877467078182
+"spend, population-weighted, g-1",-1,0.0
+"spend, population-weighted, g-1",0,-0.6047681633381946
+"spend, population-weighted, g-1",1,-0.6042693350955967
+"spend, population-weighted, g-1",2,-0.6218673616062089
+"spend, population-weighted, g-1",3,-0.09417192476528313
+"spend, population-weighted, g-1",4,-0.8598809091416442
+"spend, population-weighted, g-1",5,-0.8275030378091246
+"spend, population-weighted, g-1",6,-0.20880777645642742
+"spend, population-weighted, g-1",7,-1.02896427774392
+"spend, population-weighted, g-1",8,-0.4115041332076682
+"spend, population-weighted, May 1 base",-12,0.8027544220369505
+"spend, population-weighted, May 1 base",-11,0.2831217777520246
+"spend, population-weighted, May 1 base",-10,0.15760994924180985
+"spend, population-weighted, May 1 base",-9,-0.028193982376609795
+"spend, population-weighted, May 1 base",-8,-0.015171627490241027
+"spend, population-weighted, May 1 base",-7,-0.27060328990692706
+"spend, population-weighted, May 1 base",-6,-0.8718713820775337
+"spend, population-weighted, May 1 base",-5,-0.6859383691980739
+"spend, population-weighted, May 1 base",-4,-0.5226418870675006
+"spend, population-weighted, May 1 base",-3,-0.6609039796942383
+"spend, population-weighted, May 1 base",-2,-0.19306306736603593
+"spend, population-weighted, May 1 base",-1,-0.2924918420368177
+"spend, population-weighted, May 1 base",0,-0.8972600053750123
+"spend, population-weighted, May 1 base",1,-0.8967611771324143
+"spend, population-weighted, May 1 base",2,-0.9143592036430265
+"spend, population-weighted, May 1 base",3,-0.38666376680210096
+"spend, population-weighted, May 1 base",4,-1.152372751178462
+"spend, population-weighted, May 1 base",5,-1.0705299576741114
+"spend, population-weighted, May 1 base",6,-0.45183469632141404
+"spend, population-weighted, May 1 base",7,-1.271991197608907
+"spend, population-weighted, May 1 base",8,-0.6504420713006
+"spend, all-programs states",-12,1.0243976885896853
+"spend, all-programs states",-11,0.047789596916313896
+"spend, all-programs states",-10,0.6834042826036417
+"spend, all-programs states",-9,-0.0834146738784726
+"spend, all-programs states",-8,0.2956573565535958
+"spend, all-programs states",-7,-0.22555304069322038
+"spend, all-programs states",-6,-0.2405866047221271
+"spend, all-programs states",-5,-0.6211337029542993
+"spend, all-programs states",-4,-0.21314895019940536
+"spend, all-programs states",-3,-0.9147582121237863
+"spend, all-programs states",-2,-0.18251897984989163
+"spend, all-programs states",-1,0.0
+"spend, all-programs states",0,-0.6512449216978172
+"spend, all-programs states",1,-0.2940366046096187
+"spend, all-programs states",2,-0.998418882654564
+"spend, all-programs states",3,0.21798085829573544
+"spend, all-programs states",4,-0.967560513997558
+"spend, all-programs states",5,-0.24996833111886146
+"spend, all-programs states",6,-0.3048374410331986
+"spend, all-programs states",7,-1.0828359638640181
+"spend, all-programs states",8,-0.1214098933213073
+"spend, FPUC-only states",-12,0.1111147356930049
+"spend, FPUC-only states",-11,0.49574234632720937
+"spend, FPUC-only states",-10,1.4854976728303444
+"spend, FPUC-only states",-9,0.04736392411284403
+"spend, FPUC-only states",-8,0.9982029733916138
+"spend, FPUC-only states",-7,1.2759322376919455
+"spend, FPUC-only states",-6,0.2773401568787313
+"spend, FPUC-only states",-5,0.2070807395655851
+"spend, FPUC-only states",-4,1.07897950570941
+"spend, FPUC-only states",-3,1.2087819982161918
+"spend, FPUC-only states",-2,0.8441760172891115
+"spend, FPUC-only states",-1,0.0
+"spend, FPUC-only states",0,0.0707246749405244
+"spend, FPUC-only states",1,-0.4136326016676944
+"spend, FPUC-only states",2,-0.2796967290516038
+"spend, FPUC-only states",3,0.5195290511928149
+"spend, FPUC-only states",4,0.25694016002681597
+"spend, FPUC-only states",5,-1.7240221304730898
+"spend, FPUC-only states",6,1.2985996668321103
+"spend, FPUC-only states",7,0.6301457456851648
+"spend, FPUC-only states",8,1.5286088595008216
+"spend, June cohorts only",-12,0.750640319676598
+"spend, June cohorts only",-11,0.09431765903831339
+"spend, June cohorts only",-10,0.7654925808086245
+"spend, June cohorts only",-9,-0.27818090990143185
+"spend, June cohorts only",-8,0.2570914432380731
+"spend, June cohorts only",-7,-0.013149411754812894
+"spend, June cohorts only",-6,-0.31945976126519504
+"spend, June cohorts only",-5,-0.5162035718356489
+"spend, June cohorts only",-4,-0.1992957757451829
+"spend, June cohorts only",-3,-0.6592533531919212
+"spend, June cohorts only",-2,-0.0536744322848615
+"spend, June cohorts only",-1,0.0
+"spend, June cohorts only",0,-0.7044114395549909
+"spend, June cohorts only",1,-0.5321998661634518
+"spend, June cohorts only",2,-1.021522413932141
+"spend, June cohorts only",3,-0.09874391968868627
+"spend, June cohorts only",4,-1.19298038812928
+"spend, June cohorts only",5,-0.5789569489506691
+"spend, June cohorts only",6,-0.144699599779091
+"spend, June cohorts only",7,-0.9586541877502741
+"spend, June cohorts only",8,-0.025440509609943665
+"spend, COVID-case adjusted, g-1",-12,0.9752508122793305
+"spend, COVID-case adjusted, g-1",-11,0.2843033595089173
+"spend, COVID-case adjusted, g-1",-10,0.9957274111699306
+"spend, COVID-case adjusted, g-1",-9,0.07345050995582333
+"spend, COVID-case adjusted, g-1",-8,0.555997021115068
+"spend, COVID-case adjusted, g-1",-7,0.1777318224116816
+"spend, COVID-case adjusted, g-1",-6,-0.061768896192722376
+"spend, COVID-case adjusted, g-1",-5,-0.3942304099996359
+"spend, COVID-case adjusted, g-1",-4,0.10233509893298597
+"spend, COVID-case adjusted, g-1",-3,-0.43787064373506696
+"spend, COVID-case adjusted, g-1",-2,0.04873506053781168
+"spend, COVID-case adjusted, g-1",-1,0.0
+"spend, COVID-case adjusted, g-1",0,-0.5139392765831345
+"spend, COVID-case adjusted, g-1",1,-0.3492810699410159
+"spend, COVID-case adjusted, g-1",2,-0.8905164273293957
+"spend, COVID-case adjusted, g-1",3,0.2234803869110573
+"spend, COVID-case adjusted, g-1",4,-0.7862349629057698
+"spend, COVID-case adjusted, g-1",5,-0.6525259847599321
+"spend, COVID-case adjusted, g-1",6,-0.20606280105741473
+"spend, COVID-case adjusted, g-1",7,-0.9957320444768313
+"spend, COVID-case adjusted, g-1",8,-0.1533846573621058
+"spend, low-exposure controls (<7 per 100)",-12,-0.22199264897111146
+"spend, low-exposure controls (<7 per 100)",-11,-0.3202379220372225
+"spend, low-exposure controls (<7 per 100)",-10,0.5020933903193959
+"spend, low-exposure controls (<7 per 100)",-9,-0.13666813588069135
+"spend, low-exposure controls (<7 per 100)",-8,0.41076133272016246
+"spend, low-exposure controls (<7 per 100)",-7,0.11766423838168645
+"spend, low-exposure controls (<7 per 100)",-6,-0.13624879221825217
+"spend, low-exposure controls (<7 per 100)",-5,-0.09220284828961335
+"spend, low-exposure controls (<7 per 100)",-4,0.3190898562888705
+"spend, low-exposure controls (<7 per 100)",-3,-0.52324079639403
+"spend, low-exposure controls (<7 per 100)",-2,-0.09582299048881941
+"spend, low-exposure controls (<7 per 100)",-1,-0.12897590017413837
+"spend, low-exposure controls (<7 per 100)",0,0.010189446068538699
+"spend, low-exposure controls (<7 per 100)",1,0.3083040723765154
+"spend, low-exposure controls (<7 per 100)",2,-0.44719629990533377
+"spend, low-exposure controls (<7 per 100)",3,0.37360093112822496
+"spend, low-exposure controls (<7 per 100)",4,-0.5376373577161475
+"spend, low-exposure controls (<7 per 100)",5,-0.1234479469245429
+"spend, low-exposure controls (<7 per 100)",6,0.19797320028081827
+"spend, low-exposure controls (<7 per 100)",7,-0.5402311753068314
+"spend, low-exposure controls (<7 per 100)",8,-0.2010383181464456
+"spend, exposure-kernel-weighted controls",-12,0.12275318527166874
+"spend, exposure-kernel-weighted controls",-11,-0.16628229316681314
+"spend, exposure-kernel-weighted controls",-10,0.5038492660212212
+"spend, exposure-kernel-weighted controls",-9,-0.13315415110421588
+"spend, exposure-kernel-weighted controls",-8,0.2931477279845645
+"spend, exposure-kernel-weighted controls",-7,0.05095352764398503
+"spend, exposure-kernel-weighted controls",-6,-0.24235283764422375
+"spend, exposure-kernel-weighted controls",-5,-0.0922002041886563
+"spend, exposure-kernel-weighted controls",-4,0.3071854679135844
+"spend, exposure-kernel-weighted controls",-3,-0.41998285448620387
+"spend, exposure-kernel-weighted controls",-2,0.10324917277695389
+"spend, exposure-kernel-weighted controls",-1,0.07246696736549608
+"spend, exposure-kernel-weighted controls",0,0.05366860696874639
+"spend, exposure-kernel-weighted controls",1,0.24808095721005374
+"spend, exposure-kernel-weighted controls",2,-0.4799230087221987
+"spend, exposure-kernel-weighted controls",3,0.42750191451797653
+"spend, exposure-kernel-weighted controls",4,-0.5104165241883766
+"spend, exposure-kernel-weighted controls",5,-0.15631546461280194
+"spend, exposure-kernel-weighted controls",6,0.21956794159255064
+"spend, exposure-kernel-weighted controls",7,-0.5078315989594434
+"spend, exposure-kernel-weighted controls",8,-0.08113455511878204
+"spend, drop CA and NY (late reopeners)",-12,0.7541378878055105
+"spend, drop CA and NY (late reopeners)",-11,0.08501965138985436
+"spend, drop CA and NY (late reopeners)",-10,0.8217521805644862
+"spend, drop CA and NY (late reopeners)",-9,-0.05130803289231936
+"spend, drop CA and NY (late reopeners)",-8,0.4854092561068395
+"spend, drop CA and NY (late reopeners)",-7,0.16401153933346338
+"spend, drop CA and NY (late reopeners)",-6,-0.038845226425904274
+"spend, drop CA and NY (late reopeners)",-5,-0.4034623184148962
+"spend, drop CA and NY (late reopeners)",-4,0.13013643434723157
+"spend, drop CA and NY (late reopeners)",-3,-0.4291948758258563
+"spend, drop CA and NY (late reopeners)",-2,0.0919451908791266
+"spend, drop CA and NY (late reopeners)",-1,0.06599451028445986
+"spend, drop CA and NY (late reopeners)",0,-0.412795796496186
+"spend, drop CA and NY (late reopeners)",1,-0.24707682972923584
+"spend, drop CA and NY (late reopeners)",2,-0.7590512391629217
+"spend, drop CA and NY (late reopeners)",3,0.3619454368396932
+"spend, drop CA and NY (late reopeners)",4,-0.6374197870350298
+"spend, drop CA and NY (late reopeners)",5,-0.41462648256271706
+"spend, drop CA and NY (late reopeners)",6,0.06791904744549679
+"spend, drop CA and NY (late reopeners)",7,-0.7114534952178186
+"spend, drop CA and NY (late reopeners)",8,0.23928971758093223
+"spend, premean, population-weighted, low-exposure controls",-12,0.8195579284072555
+"spend, premean, population-weighted, low-exposure controls",-11,0.764975398940195
+"spend, premean, population-weighted, low-exposure controls",-10,0.377381593578497
+"spend, premean, population-weighted, low-exposure controls",-9,0.21018123856190307
+"spend, premean, population-weighted, low-exposure controls",-8,0.16520940098080084
+"spend, premean, population-weighted, low-exposure controls",-7,0.08045538498175991
+"spend, premean, population-weighted, low-exposure controls",-6,-0.49975498328146634
+"spend, premean, population-weighted, low-exposure controls",-5,-0.03706616426384074
+"spend, premean, population-weighted, low-exposure controls",-4,0.15412100454826183
+"spend, premean, population-weighted, low-exposure controls",-3,-0.15895809787221435
+"spend, premean, population-weighted, low-exposure controls",-2,0.29599345490670353
+"spend, premean, population-weighted, low-exposure controls",-1,0.29122665798248004
+"spend, premean, population-weighted, low-exposure controls",0,-0.15137010789226535
+"spend, premean, population-weighted, low-exposure controls",1,-0.2313753388151325
+"spend, premean, population-weighted, low-exposure controls",2,-0.3124480359147474
+"spend, premean, population-weighted, low-exposure controls",3,0.12456610681184739
+"spend, premean, population-weighted, low-exposure controls",4,-0.6119944450974905
+"spend, premean, population-weighted, low-exposure controls",5,-0.4135477031920751
+"spend, premean, population-weighted, low-exposure controls",6,0.006516325619580015
+"spend, premean, population-weighted, low-exposure controls",7,-0.7898077743463732
+"spend, premean, population-weighted, low-exposure controls",8,-0.28106812256638813
+"spend low-income ZIPs, g-1",-12,0.9141554225178306
+"spend low-income ZIPs, g-1",-11,-0.7389806335560469
+"spend low-income ZIPs, g-1",-10,-0.07418684495195767
+"spend low-income ZIPs, g-1",-9,0.1762551086350879
+"spend low-income ZIPs, g-1",-8,0.3255630196160498
+"spend low-income ZIPs, g-1",-7,0.02897790940016746
+"spend low-income ZIPs, g-1",-6,-0.34114689674828397
+"spend low-income ZIPs, g-1",-5,-0.6557293941575477
+"spend low-income ZIPs, g-1",-4,0.31191291590570297
+"spend low-income ZIPs, g-1",-3,0.3900256561498338
+"spend low-income ZIPs, g-1",-2,0.6486874836274258
+"spend low-income ZIPs, g-1",-1,0.0
+"spend low-income ZIPs, g-1",0,-1.0897998894602166
+"spend low-income ZIPs, g-1",1,-0.1348070852403063
+"spend low-income ZIPs, g-1",2,-0.6954462475982797
+"spend low-income ZIPs, g-1",3,1.156720559266877
+"spend low-income ZIPs, g-1",4,-1.3002318389618825
+"spend low-income ZIPs, g-1",5,-0.607116878987228
+"spend low-income ZIPs, g-1",6,-0.48638276246785833
+"spend low-income ZIPs, g-1",7,-0.33517829828683227
+"spend low-income ZIPs, g-1",8,-1.136819463872261
+"spend high-income ZIPs, g-1",-12,3.0488557513012275
+"spend high-income ZIPs, g-1",-11,0.6851605619359512
+"spend high-income ZIPs, g-1",-10,1.3480091589019931
+"spend high-income ZIPs, g-1",-9,0.5520371491219603
+"spend high-income ZIPs, g-1",-8,2.263893749638896
+"spend high-income ZIPs, g-1",-7,2.860375896208954
+"spend high-income ZIPs, g-1",-6,1.0209972451224276
+"spend high-income ZIPs, g-1",-5,0.46817547795250486
+"spend high-income ZIPs, g-1",-4,1.8960020791283894
+"spend high-income ZIPs, g-1",-3,1.776564161630854
+"spend high-income ZIPs, g-1",-2,1.4214797173379932
+"spend high-income ZIPs, g-1",-1,0.0
+"spend high-income ZIPs, g-1",0,0.6197692772584135
+"spend high-income ZIPs, g-1",1,0.6674491512411794
+"spend high-income ZIPs, g-1",2,1.1974365420107198
+"spend high-income ZIPs, g-1",3,1.2588728264150573
+"spend high-income ZIPs, g-1",4,0.6033134391427818
+"spend high-income ZIPs, g-1",5,1.0111232784802224
+"spend high-income ZIPs, g-1",6,1.1801638527135616
+"spend high-income ZIPs, g-1",7,0.045484016822501305
+"spend high-income ZIPs, g-1",8,1.1739284098988292
+spend low minus high income ZIPs,-12,-2.426210896954621
+spend low minus high income ZIPs,-11,-1.7921755996351683
+spend low minus high income ZIPs,-10,-2.0282843585503536
+spend low minus high income ZIPs,-9,-1.3276569669639997
+spend low minus high income ZIPs,-8,-2.7139940086153094
+spend low minus high income ZIPs,-7,-3.5507792806921494
+spend low minus high income ZIPs,-6,-1.7175886594227503
+spend low minus high income ZIPs,-5,-1.9231281573965535
+spend low minus high income ZIPs,-4,-2.8698089673379807
+spend low minus high income ZIPs,-3,-1.2025139530399183
+spend low minus high income ZIPs,-2,-1.1584866981942914
+spend low minus high income ZIPs,-1,0.0
+spend low minus high income ZIPs,0,-1.9866734293747754
+spend low minus high income ZIPs,1,-1.410205767022325
+spend low minus high income ZIPs,2,-2.480147624811713
+spend low minus high income ZIPs,3,-0.3171667865526273
+spend low minus high income ZIPs,4,-2.167323463223368
+spend low minus high income ZIPs,5,-1.9392224878289874
+spend low minus high income ZIPs,6,-2.21296980512506
+spend low minus high income ZIPs,7,-0.8167782631932099
+spend low minus high income ZIPs,8,-2.630131847205745
+"in-person spend, g-1",-12,2.8270992991835833
+"in-person spend, g-1",-11,3.6252970838311853
+"in-person spend, g-1",-10,4.941709502552302
+"in-person spend, g-1",-9,2.870545220656575
+"in-person spend, g-1",-8,4.623321597178418
+"in-person spend, g-1",-7,3.0096320085779857
+"in-person spend, g-1",-6,1.380951610563206
+"in-person spend, g-1",-5,1.7439200519052316
+"in-person spend, g-1",-4,1.358823233142737
+"in-person spend, g-1",-3,-0.4301444157703447
+"in-person spend, g-1",-2,0.2057713066939233
+"in-person spend, g-1",-1,0.0
+"in-person spend, g-1",0,0.2828702719934901
+"in-person spend, g-1",1,0.23012312346272493
+"in-person spend, g-1",2,-0.1668434998223303
+"in-person spend, g-1",3,0.09350039846105296
+"in-person spend, g-1",4,-0.20530238598620118
+"in-person spend, g-1",5,0.08936701863061369
+"in-person spend, g-1",6,0.81231585637466
+"in-person spend, g-1",7,-0.5981782508486606
+"in-person spend, g-1",8,0.12200069673045108
