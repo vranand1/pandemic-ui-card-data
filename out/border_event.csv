@@ -1,18 +1,18 @@
 spec,e,att
 "border, pre-period mean base",-10,0.2989759498936312
 "border, pre-period mean base",-9,1.973531078238339
-"border, pre-period mean base",-8,-1.1656142159051088
+"border, pre-period mean base",-8,-1.1656142159051097
 "border, pre-period mean base",-7,-0.43709450003756406
 "border, pre-period mean base",-6,-0.26572383930819643
-"border, pre-period mean base",-5,0.8287005103378462
+"border, pre-period mean base",-5,0.8287005103378463
 "border, pre-period mean base",-4,-0.6562171869245201
 "border, pre-period mean base",-3,0.9292726189997425
 "border, pre-period mean base",-2,0.7666766128378025
-"border, pre-period mean base",-1,2.148297306547304
-"border, pre-period mean base",0,-2.1404733471377684
+"border, pre-period mean base",-1,2.1482973065473043
+"border, pre-period mean base",0,-2.140473347137768
 "border, pre-period mean base",1,-1.019737090711415
 "border, pre-period mean base",2,-2.016018401052845
-"border, pre-period mean base",3,0.2715769979786682
+"border, pre-period mean base",3,0.2715769979786681
 "border, pre-period mean base",4,0.08414721160721689
 "border, pre-period mean base",5,-0.6237822223598455
 "border, pre-period mean base",6,-1.444792353711407
@@ -42,7 +42,7 @@ spec,e,att
 "border, May 1 base",-8,-1.0260178671947189
 "border, May 1 base",-7,-0.2974981513271749
 "border, May 1 base",-6,-0.12612749059780698
-"border, May 1 base",-5,0.9682968590482363
+"border, May 1 base",-5,0.9682968590482365
 "border, May 1 base",-4,-0.5166208382141302
 "border, May 1 base",-3,1.0688689677101322
 "border, May 1 base",-2,0.9062729615481921
@@ -50,72 +50,72 @@ spec,e,att
 "border, May 1 base",0,-2.0008769984273784
 "border, May 1 base",1,-0.8801407420010251
 "border, May 1 base",2,-1.8764220523424557
-"border, May 1 base",3,0.4111733466890576
+"border, May 1 base",3,0.4111733466890574
 "border, May 1 base",4,0.2237435603176067
 "border, May 1 base",5,-0.4841858736494552
 "border, May 1 base",6,-1.305196005001017
 "border, May 1 base",7,-1.6742844382495263
 "border, May 1 base",8,1.468127891304824
-"border, population-weighted, premean",-10,-1.1783390012359238
-"border, population-weighted, premean",-9,-0.09725112656171835
-"border, population-weighted, premean",-8,-1.312043254488533
-"border, population-weighted, premean",-7,-1.374939402388786
-"border, population-weighted, premean",-6,0.25713278918737237
-"border, population-weighted, premean",-5,0.20852711615915065
-"border, population-weighted, premean",-4,0.7050509491220269
-"border, population-weighted, premean",-3,0.8228067558944971
-"border, population-weighted, premean",-2,0.6934650465142718
-"border, population-weighted, premean",-1,1.7238720026411545
-"border, population-weighted, premean",0,-2.431341078590806
-"border, population-weighted, premean",1,-1.4309138264282357
-"border, population-weighted, premean",2,-1.2321583000197
-"border, population-weighted, premean",3,-1.2359264799171108
-"border, population-weighted, premean",4,-0.4674167266138496
-"border, population-weighted, premean",5,-0.9292429360847491
-"border, population-weighted, premean",6,-1.393832767684577
-"border, population-weighted, premean",7,-1.514413650552613
-"border, population-weighted, premean",8,-1.249723320522174
-"border, population-weighted, no El Paso",-10,-0.7988208276959251
-"border, population-weighted, no El Paso",-9,0.300987775356657
-"border, population-weighted, no El Paso",-8,-1.1579169469378776
-"border, population-weighted, no El Paso",-7,-1.2436237028154904
-"border, population-weighted, no El Paso",-6,0.15615682332760952
-"border, population-weighted, no El Paso",-5,-0.06088860603770687
-"border, population-weighted, no El Paso",-4,0.620810594805778
-"border, population-weighted, no El Paso",-3,0.7821431859218057
-"border, population-weighted, no El Paso",-2,0.903318651735881
-"border, population-weighted, no El Paso",-1,1.8543242169061946
-"border, population-weighted, no El Paso",0,-2.191058882840216
-"border, population-weighted, no El Paso",1,-1.493824685083371
-"border, population-weighted, no El Paso",2,-0.9268861858474214
-"border, population-weighted, no El Paso",3,-1.0066870623663118
-"border, population-weighted, no El Paso",4,-0.2742855463242185
-"border, population-weighted, no El Paso",5,-0.7328890963217397
-"border, population-weighted, no El Paso",6,-1.0299333200684369
-"border, population-weighted, no El Paso",7,-1.252325625162789
-"border, population-weighted, no El Paso",8,-0.9321684818241313
-"border, population-weighted, both counties under 500k",-10,0.2952699428996662
-"border, population-weighted, both counties under 500k",-9,0.7274230765381544
-"border, population-weighted, both counties under 500k",-8,-0.5953745697906022
-"border, population-weighted, both counties under 500k",-7,-1.1741761318523307
-"border, population-weighted, both counties under 500k",-6,0.16915392896668616
-"border, population-weighted, both counties under 500k",-5,0.34603174992916635
-"border, population-weighted, both counties under 500k",-4,-0.20251622378901835
-"border, population-weighted, both counties under 500k",-3,0.4455881663024381
-"border, population-weighted, both counties under 500k",-2,1.0112930802336595
-"border, population-weighted, both counties under 500k",-1,2.2229603787394185
-"border, population-weighted, both counties under 500k",0,-1.878039942235567
-"border, population-weighted, both counties under 500k",1,-1.4870334045871887
-"border, population-weighted, both counties under 500k",2,-1.5625344682525446
-"border, population-weighted, both counties under 500k",3,-1.5369846363503425
-"border, population-weighted, both counties under 500k",4,0.027714025477409504
-"border, population-weighted, both counties under 500k",5,-0.6519607228207215
-"border, population-weighted, both counties under 500k",6,-1.4017841786451384
-"border, population-weighted, both counties under 500k",7,-0.7272088681320658
-"border, population-weighted, both counties under 500k",8,0.4870435193452721
+"border, population-weighted, premean",-10,-1.292474327878993
+"border, population-weighted, premean",-9,-0.1585348173800082
+"border, population-weighted, premean",-8,-1.3532853535267724
+"border, population-weighted, premean",-7,-1.4159961814666477
+"border, population-weighted, premean",-6,0.2923547780560232
+"border, population-weighted, premean",-5,0.2781107465715932
+"border, population-weighted, premean",-4,0.694602361458904
+"border, population-weighted, premean",-3,0.8516219557203427
+"border, population-weighted, premean",-2,0.6525916931865573
+"border, population-weighted, premean",-1,1.710959048216004
+"border, population-weighted, premean",0,-2.4738017190194768
+"border, population-weighted, premean",1,-1.42567976106205
+"border, population-weighted, premean",2,-1.2163685510728999
+"border, population-weighted, premean",3,-1.2455353161443539
+"border, population-weighted, premean",4,-0.46695614110615563
+"border, population-weighted, premean",5,-0.8893772323039101
+"border, population-weighted, premean",6,-1.3354501725049626
+"border, population-weighted, premean",7,-1.42104542636509
+"border, population-weighted, premean",8,-1.3587719865148222
+"border, population-weighted, no El Paso",-10,-0.9140926639213603
+"border, population-weighted, no El Paso",-9,0.24130327424032072
+"border, population-weighted, no El Paso",-8,-1.199376682572078
+"border, population-weighted, no El Paso",-7,-1.2851484414323147
+"border, population-weighted, no El Paso",-6,0.191912948272523
+"border, population-weighted, no El Paso",-5,0.008955715523316744
+"border, population-weighted, no El Paso",-4,0.6089060967577758
+"border, population-weighted, no El Paso",-3,0.8118719361197034
+"border, population-weighted, no El Paso",-2,0.8628784273310731
+"border, population-weighted, no El Paso",-1,1.8422770043443224
+"border, population-weighted, no El Paso",0,-2.232816443610415
+"border, population-weighted, no El Paso",1,-1.4890555399779042
+"border, population-weighted, no El Paso",2,-0.9068742342509802
+"border, population-weighted, no El Paso",3,-1.0141500260931224
+"border, population-weighted, no El Paso",4,-0.2716086552841974
+"border, population-weighted, no El Paso",5,-0.6888893751021717
+"border, population-weighted, no El Paso",6,-0.964629139603999
+"border, population-weighted, no El Paso",7,-1.1515224551026633
+"border, population-weighted, no El Paso",8,-1.043979132775057
+"border, population-weighted, both counties under 500k",-10,0.13985936256556747
+"border, population-weighted, both counties under 500k",-9,0.6445511885265767
+"border, population-weighted, both counties under 500k",-8,-0.6483687640383095
+"border, population-weighted, both counties under 500k",-7,-1.2357348246328428
+"border, population-weighted, both counties under 500k",-6,0.22341079243078638
+"border, population-weighted, both counties under 500k",-5,0.45856531832561165
+"border, population-weighted, both counties under 500k",-4,-0.2346422229943178
+"border, population-weighted, both counties under 500k",-3,0.4847349314880932
+"border, population-weighted, both counties under 500k",-2,0.9520347694209781
+"border, population-weighted, both counties under 500k",-1,2.21108430640175
+"border, population-weighted, both counties under 500k",0,-1.9357684332721314
+"border, population-weighted, both counties under 500k",1,-1.4797097950539566
+"border, population-weighted, both counties under 500k",2,-1.5432067995531724
+"border, population-weighted, both counties under 500k",3,-1.557367495632333
+"border, population-weighted, both counties under 500k",4,0.036944500702460956
+"border, population-weighted, both counties under 500k",5,-0.5840799988753725
+"border, population-weighted, both counties under 500k",6,-1.309482784202775
+"border, population-weighted, both counties under 500k",7,-0.5658617175780876
+"border, population-weighted, both counties under 500k",8,0.3470444383007063
 "border, all-programs states only",-10,-0.5531356870996814
 "border, all-programs states only",-9,1.956479501532736
-"border, all-programs states only",-8,-1.3236408576830132
+"border, all-programs states only",-8,-1.3236408576830136
 "border, all-programs states only",-7,0.6786228466605803
 "border, all-programs states only",-6,-0.0004488754501134034
 "border, all-programs states only",-5,0.8176453210062219
@@ -126,15 +126,15 @@ spec,e,att
 "border, all-programs states only",0,-2.6136596319642513
 "border, all-programs states only",1,-0.9068347774660473
 "border, all-programs states only",2,-2.770540824119898
-"border, all-programs states only",3,0.29084979523171967
+"border, all-programs states only",3,0.29084979523171955
 "border, all-programs states only",4,-0.4900811306452216
 "border, all-programs states only",5,-0.14057205072490575
-"border, all-programs states only",6,-1.8096023776026862
+"border, all-programs states only",6,-1.8096023776026864
 "border, all-programs states only",7,-1.9798345033275673
 "border, all-programs states only",8,0.6093277895722045
 "border, June cohorts only",-10,0.9590426859193848
 "border, June cohorts only",-9,1.9672116562434565
-"border, June cohorts only",-8,-2.5875164076353006
+"border, June cohorts only",-8,-2.5875164076353014
 "border, June cohorts only",-7,-0.4140512799251208
 "border, June cohorts only",-6,0.10246085786142634
 "border, June cohorts only",-5,1.6634007158275639
@@ -150,10 +150,10 @@ spec,e,att
 "border, June cohorts only",5,-0.9260453354738356
 "border, June cohorts only",6,-1.0446215562429073
 "border, June cohorts only",7,-1.2305187523062469
-"border, June cohorts only",8,0.5428507599646546
+"border, June cohorts only",8,0.5428507599646545
 "border, drop largest segment",-10,-0.21300304452974975
 "border, drop largest segment",-9,1.2857251404598045
-"border, drop largest segment",-8,-1.870960103549557
+"border, drop largest segment",-8,-1.8709601035495578
 "border, drop largest segment",-7,-0.6349854316345296
 "border, drop largest segment",-6,-0.8472581996193549
 "border, drop largest segment",-5,1.4228277977725703
@@ -164,8 +164,8 @@ spec,e,att
 "border, drop largest segment",0,-2.0961523364199475
 "border, drop largest segment",1,-1.0134953536947835
 "border, drop largest segment",2,-2.3078648819734084
-"border, drop largest segment",3,0.08332631724901648
-"border, drop largest segment",4,0.8277307722254317
+"border, drop largest segment",3,0.08332631724901636
+"border, drop largest segment",4,0.8277307722254318
 "border, drop largest segment",5,-0.5360148470089079
 "border, drop largest segment",6,-1.4216890645187772
 "border, drop largest segment",7,-1.356998362449559
@@ -194,17 +194,17 @@ spec,e,att
 "border, low-exposure treated counties",-8,-2.0981776704193966
 "border, low-exposure treated counties",-7,-0.0663300641905997
 "border, low-exposure treated counties",-6,-3.741081675958797
-"border, low-exposure treated counties",-5,0.3183764709844167
+"border, low-exposure treated counties",-5,0.31837647098441674
 "border, low-exposure treated counties",-4,3.3191970544237317
 "border, low-exposure treated counties",-3,1.6995821723466191
-"border, low-exposure treated counties",-2,0.5684337128140271
-"border, low-exposure treated counties",-1,0.28018372914191964
-"border, low-exposure treated counties",0,-0.2853975645243044
+"border, low-exposure treated counties",-2,0.5684337128140273
+"border, low-exposure treated counties",-1,0.2801837291419198
+"border, low-exposure treated counties",0,-0.28539756452430404
 "border, low-exposure treated counties",1,-0.6429470513268383
 "border, low-exposure treated counties",2,-1.030897897025476
 "border, low-exposure treated counties",3,-2.0484925858930474
-"border, low-exposure treated counties",4,0.24087383428858108
+"border, low-exposure treated counties",4,0.24087383428858122
 "border, low-exposure treated counties",5,-1.9824627915522872
-"border, low-exposure treated counties",6,-0.05518666625104919
+"border, low-exposure treated counties",6,-0.055186666251049
 "border, low-exposure treated counties",7,-3.755261588743381
 "border, low-exposure treated counties",8,-2.050549201404132

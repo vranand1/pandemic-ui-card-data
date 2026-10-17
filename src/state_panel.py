@@ -14,8 +14,10 @@ def load_state():
     u = u[["statefips", "week", "contclaims_rate_combined", "contclaims_count_combined", "contclaims_rate_regular"]]
     c = pd.read_csv(RAW / "COVID_-_State_-_Daily.csv", na_values=".")
     c["date"] = pd.to_datetime(dict(year=c.year, month=c.month, day=c.day))
-    c["week"] = c.date.map(week_end)
-    cv = c.groupby(["statefips", "week"]).new_case_rate.mean().rename("new_case_rate").reset_index()
+    # new_case_rate is already a 7-day rolling figure; take the Saturday value, as for spending (averaging it over
+    # the week again would be the 13-day double smoothing the post criticizes)
+    c = c[c.date.dt.weekday == 5].rename(columns={"date": "week"})
+    cv = c[["statefips", "week", "new_case_rate"]]
     df = sp.merge(u, on=["statefips", "week"], how="left").merge(cv, on=["statefips", "week"], how="left")
     df = df.merge(st[["statefips", "stateabbrev", "state_pop2019", "g", "kind", "treated"]], on="statefips")
     df = df[(df.week >= START) & (df.week <= STOP)].copy()

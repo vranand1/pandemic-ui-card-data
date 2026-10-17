@@ -22,8 +22,8 @@ def load_counties():
     sp = sp[(sp.week >= START) & (sp.week <= STOP)]
     sp["y"] = logpts(sp.spend_all)
     W = sp.pivot(index="countyfips", columns="week", values="y")
-    # keep counties with a complete series
-    W = W.dropna()
+    # keep counties with a complete, finite series (one county reports spend_all = -1.0 for a week, which logs to -inf)
+    W = W.replace([np.inf, -np.inf], np.nan).dropna()
     u = pd.read_csv(RAW / "UI_Claims_-_County_-_Weekly.csv", na_values=".")
     u["week"] = pd.to_datetime(dict(year=u.year, month=u.month, day=u.day_endofweek))
     expo = u[(u.week >= "2021-03-01") & (u.week <= "2021-05-29")].groupby("countyfips").initclaims_rate_regular.mean()
@@ -61,24 +61,27 @@ def build_pairs(st, W, geo, adj):
 
 
 def pair_weights(pr, pop):
-    """Harmonic mean of the two counties' populations, divided by the number of pairs each county appears in,
-    so a large county paired with three neighbors does not enter three times at full weight."""
+    """Harmonic mean of the two counties' populations, divided by the geometric mean of the number of pairs each
+    county appears in, so a county paired with several neighbors does not enter each time at full weight.
+    Reuse is counted over the whole pair table passed in (round-4 fix: counting within cohort missed four control
+    counties that border treated counties in two cohorts)."""
     pt, pc = pr.t_fips.map(pop).astype(float), pr.c_fips.map(pop).astype(float)
     hm = 2 * pt * pc / (pt + pc)
     reuse = pr.t_fips.map(pr.t_fips.value_counts()) * pr.c_fips.map(pr.c_fips.value_counts())
     return (hm / np.sqrt(reuse)).values
 
 
-def pair_event(W, pr, base="g-1", weights=None):
+def pair_event(W, pr, base="premean", weights=None):
     """Average over pairs of [ (yT_t - yT_b) - (yC_t - yC_b) ] by event time; plus overall post and pre.
-    weights: None (equal) or 'pop' (pair_weights with county_pop2019 from the global POP series)."""
+    weights: None (equal) or a county population Series (pair_weights computed on the full pair table)."""
     rows = []
+    w_all = None if weights is None else pd.Series(pair_weights(pr, weights), index=pr.index)
     for g, grp in pr.groupby("g"):
         bT, bC = base_values(W, g, base, list(grp.t_fips), list(grp.c_fips))
         dT = W.loc[grp.t_fips].sub(bT.values, axis=0).values
         dC = W.loc[grp.c_fips].sub(bC.values, axis=0).values
         d = dT - dC
-        w = np.ones(len(grp)) if weights is None else pair_weights(grp, weights)
+        w = np.ones(len(grp)) if weights is None else w_all.loc[grp.index].values
         for j, (t, e) in enumerate(zip(W.columns, rel_event(W, g))):
             if EMIN <= e <= EMAX:
                 rows.append((g, e, np.average(d[:, j], weights=w), len(grp), w.sum()))
@@ -129,7 +132,7 @@ def run(B_ri=1000, B_boot=999):
 
     results, paths = [], []
 
-    def add(name, subset_fn=None, base="g-1", weights=None, ri=True):
+    def add(name, subset_fn=None, base="premean", weights=None, ri=True):
         prs = subset_fn(pr, st) if subset_fn else pr
         ev, post, pre = pair_event(W, prs, base=base, weights=weights)
         slope = pretrend_slope(ev, emin=-8, emax=-1)
@@ -146,7 +149,7 @@ def run(B_ri=1000, B_boot=999):
                             boot_lo=np.quantile(bs, .025), boot_hi=np.quantile(bs, .975), ri_sd=sd_ri, ri_p=p_ri,
                             ci_lo=post - q_hi, ci_hi=post - q_lo, pre_avg=pre, pre_minus1=float(ev.get(-1, np.nan)),
                             pre_min=float(ev[ev.index < -1].min()), pre_max=float(ev[ev.index < -1].max()),
-                            pre_slope=slope, trend_adj_post=linear_trend_adjusted_post(ev, slope)))
+                            pre_slope=slope, trend_adj_post=linear_trend_adjusted_post(ev)))
         for e, v in ev.items():
             paths.append(dict(spec=name, e=e, att=v))
         print(f"{name:40s} post={post:6.2f} boot_se={bs.std(ddof=1):5.2f} ri_sd={sd_ri:5.2f} ri_p={p_ri:4.2f} pre={pre:6.2f} slope={slope:6.3f}")
@@ -156,8 +159,8 @@ def run(B_ri=1000, B_boot=999):
     drop_big = lambda p, s: p[p.segment != p.segment.value_counts().index[0]]          # drop the largest segment, whichever it is
     no_elpaso = lambda p, s: p[~p.t_fips.isin([48141])] if 48141 in set(p.t_fips) else p
     big_pop = lambda p, s: p[(p.t_fips.map(pop) < 500000) & (p.c_fips.map(pop) < 500000)]
-    add("border, pre-period mean base", base="premean")
-    add("border, g-1 base")
+    add("border, pre-period mean base")
+    add("border, g-1 base", base="g-1")
     add("border, May 1 base", base=ANNOUNCE_BASE)
     add("border, population-weighted, premean", base="premean", weights=pop)
     add("border, population-weighted, no El Paso", no_elpaso, base="premean", weights=pop)

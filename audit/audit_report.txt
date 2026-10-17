@@ -1,12 +1,15 @@
 A. Monte Carlo (state estimator, 49 units, cohorts of 4/7/10/1/1, AR(1) noise, heterogeneous dynamic effects)
-   base=g-1      true effect -1 (avg -1.3 with dynamics): bias=+0.032 sd=0.316 RI-95% coverage=0.93
+   base=g-1      true effect -1 (avg -1.3 with dynamics): bias=+0.032 sd=0.316 RI-95% coverage=0.90
    base=premean  true effect -1 (avg -1.3 with dynamics): bias=-0.013 sd=0.256 RI-95% coverage=1.00
    sharp null, premean: bias=-0.013 sd=0.256 RI rejection rate at 5% = 0.000
    spurious pre-trend 0.1/week, no effect: estimator bias=+0.903 (expected: biased; the pre-trend diagnostics must catch this)
    border pair estimator, shared local shocks, true effect -1: bias=-0.002 sd=0.114
 B. Independent OLS re-implementation (unit and week FE, cohort by cohort vs never-treated)
-   y_spend_all  hand-coded premean = -0.307664 | OLS = -0.307664 | diff = +2.44e-15
-   y_claims     hand-coded premean = -1.290724 | OLS = -1.290724 | diff = +4.00e-15
+   y_spend_all    hand-coded premean = -0.307664 | OLS = -0.307664 | diff = +1.55e-15
+   y_claims       hand-coded premean = -1.290724 | OLS = -1.290724 | diff = +1.33e-15
+   y_spend_all_q1 hand-coded premean = -0.651213 | OLS = -0.651213 | diff = +8.88e-16
+   y_spend_all_q4 hand-coded premean = -0.759145 | OLS = -0.759145 | diff = -2.00e-15
+   y_spend_all population-weighted: hand-coded = -0.558001 | WLS = -0.558001 | diff = +3.53e-14
    border premean hand-coded = -0.9193 | stacked OLS with pair x week and pair x side FE = -0.9098 (differ by cell weighting across cohorts with truncated post windows)
 C. Smoothing window check (same estimator, two weekly aggregations)
    13-day window (old)    g-1 base = +0.207 | premean base = -0.205
@@ -14,7 +17,7 @@ C. Smoothing window check (same estimator, two weekly aggregations)
 D. Design checks
    cohorts: 2021-06-19: AK IA MO MS; 2021-06-26: AL ID ND NE NH WV WY; 2021-07-03: AR FL GA MT OH OK SC SD TX UT; 2021-07-10: TN; 2021-07-17: AZ; 2021-08-07: LA
    never-treated (24): CA CO CT DE HI IL KS KY MA ME MI MN NC NJ NM NV NY OR PA RI VA VT WA WI
-   border pairs 140, segments 31, largest: {'SC-NC': 21, 'MO-IL': 12, 'ND-MN': 9, 'UT-CO': 9, 'TN-NC': 9, 'WV-VA': 8}; treated counties used in >1 pair: 42
+   border pairs 140, segments 31, largest: {'SC-NC': 21, 'MO-IL': 12, 'ND-MN': 9, 'TN-NC': 9, 'UT-CO': 9, 'WV-VA': 8}; treated counties used in >1 pair: 42
    Iowa claims around June 12 end date (claims dated by the week they cover):
       week  contclaims_count_combined  contclaims_count_peuc  contclaims_count_pua
 2021-06-05                    54564.0                19413.0               10790.0

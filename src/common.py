@@ -65,13 +65,21 @@ def rel_event(W, g):
 
 # ---------- Staggered DiD, never-treated controls (Callaway and Sant'Anna 2021 style) ----------
 
-def att_gt(W, cohorts, controls, base="g-1", weights=None, emin=-12, emax=8):
+def att_gt(W, cohorts, controls, base="premean", weights=None, emin=-12, emax=8):
     """W: unit x week outcome matrix. cohorts: {g: [units]}. controls: [units].
-    base: 'g-1' (universal base, week before treatment) or a Timestamp (fixed pre-announcement base).
-    Returns long frame of ATT(g, e) with cohort sizes, and a dict of overall and pre averages."""
+    base: 'premean' (mean of event weeks -8 to -2), 'g-1' (week before treatment) or a Timestamp (fixed calendar week).
+    Returns a long frame of ATT(g, e) with the cohort weight n used by `aggregate`: the number of treated units with
+    data in that week, or, when `weights` is given, the sum of their weights. Weighting across cohorts by the same
+    weights used within cohorts is what makes a population-weighted estimate population-weighted (round-4 fix:
+    the earlier code weighted across cohorts by the count of states, so Alabama outweighed Florida).
+    Units with no data at all in W are dropped from both groups."""
     rows = []
+    has_data = set(W.index[W.notna().any(axis=1)])
+    controls = [u for u in controls if u in has_data]
     for g, members in cohorts.items():
-        m = [u for u in members if u in W.index]
+        m = [u for u in members if u in has_data]
+        if not m:
+            continue
         bT, bC = base_values(W, g, base, m, controls)
         if bT is None:
             continue
@@ -79,12 +87,15 @@ def att_gt(W, cohorts, controls, base="g-1", weights=None, emin=-12, emax=8):
         dC = W.loc[controls].sub(bC, axis=0)
         if weights is None:
             mT, mC = dT.mean(), dC.mean()
+            n_t = dT.notna().sum()
         else:
-            mT = _wmean(dT, weights.reindex(m)); mC = _wmean(dC, weights.reindex(controls))
+            wm = weights.reindex(m).astype(float)
+            mT = _wmean(dT, wm); mC = _wmean(dC, weights.reindex(controls))
+            n_t = dT.notna().mul(wm, axis=0).sum()
         att = mT - mC
         for t, e in zip(W.columns, rel_event(W, g)):
             if emin <= e <= emax and not np.isnan(att[t]):
-                rows.append((g, e, att[t], len(m)))
+                rows.append((g, e, att[t], float(n_t[t])))
     r = pd.DataFrame(rows, columns=["g", "e", "att", "n"])
     return r
 
@@ -126,10 +137,18 @@ def pretrend_slope(ev, emin=-8, emax=-1):
     return float((x * (y - y.mean())).sum() / (x ** 2).sum())
 
 
-def linear_trend_adjusted_post(ev, slope):
-    """Post average after extrapolating the pre-period linear trend (Dobkin et al. 2018 style, one of several bounds)."""
+def linear_trend_adjusted_post(ev, slope=None, emin=-8, emax=-1):
+    """Post average after subtracting the straight line fitted to the pre-period path on event weeks emin..emax
+    (Dobkin et al. 2018 style, one of several bounds). The line carries its own intercept, so the result does not
+    depend on where the series is anchored. Round-4 fix: the earlier version subtracted slope * (e + 1), which
+    assumes the path is zero at e = -1 and is only right for the g-1 anchor; under the pre-period mean anchor
+    (centered at e = -5) it removed five ninths of a linear trend. `slope` is accepted for backward compatibility
+    and ignored; the slope is refitted on the same window."""
+    x = np.array([e for e in ev.index if emin <= e <= emax], dtype=float); y = ev.reindex(x.astype(int)).values
+    xbar, ybar = x.mean(), y.mean()
+    b = float(((x - xbar) * (y - ybar)).sum() / ((x - xbar) ** 2).sum())
     post = [e for e in ev.index if e >= 0]
-    return float(np.mean([ev[e] - slope * (e + 1) for e in post]))
+    return float(np.mean([ev[e] - (ybar + b * (e - xbar)) for e in post]))
 
 
 def kernel_weights(exposure, target_mean, bw=1.5):
@@ -148,4 +167,29 @@ def randomization_inference(stat_fn, units, n_treated_by_cohort, B=1000, seed=11
         for g, n in n_treated_by_cohort.items():
             cohorts[g] = perm[i:i + n]; i += n
         draws.append(stat_fn(cohorts, perm[i:]))
+    return np.array(draws)
+
+
+def stratified_randomization_inference(stat_fn, cohorts, controls, strata, B=1000, seed=11):
+    """Reassign cohorts at random WITHIN strata, keeping each cohort's count in each stratum. Use this when the
+    estimator conditions on a unit characteristic (here the May 29 claim rate): an unstratified permutation gives
+    pseudo-treated groups whose exposure sits at the grand mean, and a statistic that reweights comparison units
+    toward the treated mean is then not centered at zero under the sharp null (round-4 fix, referee error 1).
+    strata: Series unit -> stratum label."""
+    rng = np.random.default_rng(seed)
+    real = {u: g for g, m in cohorts.items() for u in m}
+    units = [u for m in cohorts.values() for u in m] + list(controls)
+    by_s = {}
+    for u in units:
+        by_s.setdefault(strata[u], []).append(u)
+    counts = {s: {g: sum(1 for u in us if real.get(u) == g) for g in cohorts} for s, us in by_s.items()}
+    draws = []
+    for _ in range(B):
+        coh = {g: [] for g in cohorts}; ctl = []
+        for s, us in by_s.items():
+            perm = list(rng.permutation(us)); i = 0
+            for g in cohorts:
+                n = counts[s][g]; coh[g] += perm[i:i + n]; i += n
+            ctl += perm[i:]
+        draws.append(stat_fn({g: sorted(m) for g, m in coh.items() if m}, sorted(ctl)))
     return np.array(draws)

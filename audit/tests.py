@@ -33,6 +33,7 @@ def sim_panel(n_units=49, n_weeks=27, cohorts=(16, 17, 18, 19, 20), n_treated=(4
     for t in range(n_weeks):
         e0 = rho * e0 + r.normal(0, 1, n_units); eps[:, t] = e0
     Y = alpha[:, None] + gamma[None, :] + eps
+    E = np.zeros_like(Y)                                             # imposed treatment effects, kept separately
     perm = list(r.permutation(units)); coh = {}; i = 0
     for c, n in zip(cohorts, n_treated):
         coh[weeks[c]] = perm[i:i + n]; i += n
@@ -48,9 +49,10 @@ def sim_panel(n_units=49, n_weeks=27, cohorts=(16, 17, 18, 19, 20), n_treated=(4
                 e = t - gi
                 if e >= 0 and tau is not None:
                     eff = tau * (1 + 0.1 * e) * (1.5 if (het and gi == cohorts[0]) else 1.0)
-                    Y[ui, t] += eff; truth.setdefault((g, e), []).append(eff)
-    W = pd.DataFrame(Y, index=units, columns=weeks)
-    return W, coh, ctl, truth
+                    E[ui, t] = eff; truth.setdefault((g, e), []).append(eff)
+    W = pd.DataFrame(Y + E, index=units, columns=weeks)
+    W0 = pd.DataFrame(Y, index=units, columns=weeks)                 # the same panel with the effect removed
+    return W, coh, ctl, truth, W0
 
 
 def true_post_att(truth, coh):
@@ -59,20 +61,26 @@ def true_post_att(truth, coh):
     return np.average(r.att, weights=r.n)
 
 
-def mc_state(R=120, tau=-1.0, base="premean", pretrend=0.0):
+def mc_state(R=120, tau=-1.0, base="premean", pretrend=0.0, n_ri=30, B=150):
+    """Bias and sd of the estimator, and either the size of the randomization test (tau = 0) or the coverage of the
+    95% randomization interval (tau != 0). For coverage the null is built from the panel with the imposed effect
+    removed (W0), which is what a test of the sharp null 'effect = truth' permutes. Round-4 fix: permuting the panel
+    with the effect still in it inflated the null and reported 100% coverage.
+    Note: for an additive effect and this linear estimator, est - truth does not depend on tau, so the bias and sd
+    lines for tau = -1 and tau = 0 coincide by construction; the pre-trend line is the informative bias check."""
     errs, covers, pvals = [], [], []
     for s in range(R):
-        W, coh, ctl, truth = sim_panel(tau=tau, seed=s, pretrend=pretrend)
+        W, coh, ctl, truth, W0 = sim_panel(tau=tau, seed=s, pretrend=pretrend)
         est = aggregate(att_gt(W, coh, ctl, base=base))[1]
         tr = true_post_att(truth, coh) if tau else 0.0
         errs.append(est - tr)
-        if s < 30:   # RI is the slow part
+        if s < n_ri:   # RI is the slow part
             sizes = {g: len(m) for g, m in coh.items()}
-            null = randomization_inference(lambda c, k: aggregate(att_gt(W, c, k, base=base))[1], list(W.index), sizes, B=150, seed=s)
+            null = randomization_inference(lambda c, k: aggregate(att_gt(W0, c, k, base=base))[1], list(W.index), sizes, B=B, seed=s)
             if tau == 0:
                 pvals.append((np.abs(null) >= abs(est)).mean())
             else:
-                covers.append(abs(est - tr) <= np.quantile(np.abs(null), .95))
+                covers.append(np.quantile(null, .025) <= est - tr <= np.quantile(null, .975))
     return np.mean(errs), np.std(errs), (np.mean(np.array(pvals) <= .05) if pvals else None), (np.mean(covers) if covers else None)
 
 
@@ -102,10 +110,12 @@ def mc_border(R=60, tau=-1.0):
 
 
 # ---------------- B. OLS re-implementation ----------------
-def ols_cohort_att(df, st, y="y_spend_all", pre=(-8, -2), post=(0, 8)):
-    """For each cohort g: OLS of y on unit FE + week FE + D (treated x post) using cohort g and never-treated
-    states, restricted to event weeks in pre window and post window. Then n-weighted average of cohort ATTs
-    with the same (g, e) cell weighting as `aggregate`."""
+def ols_cohort_att(df, st, y="y_spend_all", pre=(-8, -2), post=(0, 8), weights=None):
+    """For each cohort g: OLS (or WLS with state weights) of y on unit FE + week FE + D (treated x post) using cohort
+    g and never-treated states, restricted to event weeks in the pre and post windows. Then average cohort ATTs
+    with the same (g, e) cell weighting as `aggregate`: the number (or weight sum) of treated states with data,
+    times the number of post weeks. Round-4 change: states with no data for y are excluded from the cohort count,
+    and the weighted version is run so the population-weighted estimator is checked too."""
     cohorts, controls = design(st)
     rows = []
     for g, m in cohorts.items():
@@ -114,11 +124,15 @@ def ols_cohort_att(df, st, y="y_spend_all", pre=(-8, -2), post=(0, 8)):
         d = d[((d.e >= pre[0]) & (d.e <= pre[1])) | ((d.e >= post[0]) & (d.e <= post[1]))]
         d["D"] = (d.stateabbrev.isin(m) & (d.e >= 0)).astype(int)
         d = d.dropna(subset=[y])
-        fit = smf.ols(f"{y} ~ D + C(stateabbrev) + C(week)", data=d).fit()
+        m_data = [u for u in m if u in set(d.stateabbrev)]
+        if weights is None:
+            fit = smf.ols(f"{y} ~ D + C(stateabbrev) + C(week)", data=d).fit(); n = len(m_data)
+        else:
+            fit = smf.wls(f"{y} ~ D + C(stateabbrev) + C(week)", data=d, weights=d.stateabbrev.map(weights).astype(float)).fit()
+            n = float(weights.reindex(m_data).sum())
         n_post = d[d.stateabbrev.isin(m) & (d.e >= 0)].e.nunique()
-        rows.append(dict(g=g, n=len(m), att=fit.params["D"], n_post_weeks=n_post))
+        rows.append(dict(g=g, n=n, att=fit.params["D"], n_post_weeks=n_post))
     r = pd.DataFrame(rows)
-    # aggregate() weights each (g, e) cell by n; equivalently weight cohort ATT by n x number of post weeks
     return np.average(r.att, weights=r.n * r.n_post_weeks), r
 
 
@@ -173,10 +187,14 @@ if __name__ == "__main__":
     log("B. Independent OLS re-implementation (unit and week FE, cohort by cohort vs never-treated)")
     df, st = load_state(); st = st[st.stateabbrev != "DC"]; df = df[df.stateabbrev != "DC"]
     cohorts, controls = design(st)
-    for y in ("y_spend_all", "y_claims"):
+    for y in ("y_spend_all", "y_claims", "y_spend_all_q1", "y_spend_all_q4"):
         hand = aggregate(att_gt(wide(df, y), cohorts, controls, base="premean"))[1]
         ols, r = ols_cohort_att(df, st, y=y)
-        log(f"   {y:12s} hand-coded premean = {hand:+.6f} | OLS = {ols:+.6f} | diff = {hand - ols:+.2e}")
+        log(f"   {y:14s} hand-coded premean = {hand:+.6f} | OLS = {ols:+.6f} | diff = {hand - ols:+.2e}")
+    pop = st.set_index("stateabbrev").state_pop2019.astype(float)
+    hand = aggregate(att_gt(wide(df, "y_spend_all"), cohorts, controls, base="premean", weights=pop))[1]
+    ols, r = ols_cohort_att(df, st, y="y_spend_all", weights=pop)
+    log(f"   y_spend_all population-weighted: hand-coded = {hand:+.6f} | WLS = {ols:+.6f} | diff = {hand - ols:+.2e}")
     W, geo, expo = Bd.load_counties(); adj = Bd.adjacency(); pr = Bd.build_pairs(st, W, geo, adj)
     hand = Bd.pair_event(W, pr, base="premean")[1]
     ols = ols_border(W, pr)

@@ -45,21 +45,21 @@ def main():
         ax.set_title(title); ax.set_xlabel("Weeks since federal benefits ended"); ax.grid(alpha=.12)
     axes[1].axhspan(-0.67, -0.38, color=ORANGE, alpha=.18, lw=0); axes[1].text(-11.5, -0.67 - 0.25, "Drop implied by Coombs et al.", color=ORANGE, fontsize=8)
     axes[0].legend(frameon=False, fontsize=7.5, loc="lower left")
-    fig.text(0.01, -0.03, "Spending anchored to the average of weeks -8 to -2 before withdrawal. Data: Opportunity Insights Economic Tracker (Affinity Solutions card data; DOL claims).", fontsize=7.5, color=MUTED)
+    fig.text(0.01, -0.03, "Spending anchored to the average of weeks -8 to -2 before withdrawal; claims anchored to week -1. Data: Opportunity Insights Economic Tracker (Affinity Solutions card data; DOL claims).", fontsize=7.5, color=MUTED)
     fig.tight_layout(); fig.savefig(FIG / "ui-withdrawal-state-event-study.png", dpi=180, bbox_inches="tight"); plt.close(fig)
 
     # Specification chart
     sp = pd.read_csv(OUT / "state_specs.csv"); bd = pd.read_csv(OUT / "border_specs.csv")
     keep_s = ["spend, pre-period mean base", "spend, g-1 base", "spend, pre-announcement base (May 1)", "spend, population-weighted, premean",
-              "spend, all-programs states", "spend, June cohorts only", "spend, COVID-case adjusted, g-1", "spend low-income ZIPs, g-1",
-              "spend, drop CA and NY (late reopeners)", "spend, low-exposure controls (<7 per 100)", "spend, exposure-kernel-weighted controls"]
+              "spend, all-programs states", "spend, June cohorts only", "spend, COVID-case adjusted", "spend low-income ZIPs",
+              "spend, drop CA and NY (late reopeners)", "spend, low-exposure states (<7 per 100, both sides)", "spend, exposure-kernel-weighted controls"]
     keep_b = ["border, pre-period mean base", "border, population-weighted, premean", "border, population-weighted, no El Paso",
               "border, all-programs states only", "border, drop largest segment", "border, May 1 base"]
     nice = {"spend, pre-period mean base": "State: all 24 comparison states", "spend, g-1 base": "State: anchor on week before withdrawal",
             "spend, pre-announcement base (May 1)": "State: anchor on May 1", "spend, population-weighted, premean": "State: population-weighted",
             "spend, all-programs states": "State: 19 all-program states only", "spend, June cohorts only": "State: June cohorts only",
-            "spend, COVID-case adjusted, g-1": "State: COVID case rate partialled out", "spend low-income ZIPs, g-1": "State: lowest-income ZIP codes",
-            "spend, drop CA and NY (late reopeners)": "State: drop CA and NY", "spend, low-exposure controls (<7 per 100)": "State: 10 low-claim comparison states",
+            "spend, COVID-case adjusted": "State: COVID case rate partialled out", "spend low-income ZIPs": "State: lowest-income ZIP codes",
+            "spend, drop CA and NY (late reopeners)": "State: drop CA and NY", "spend, low-exposure states (<7 per 100, both sides)": "State: low-claim states only (20 vs 10)",
             "spend, exposure-kernel-weighted controls": "State: comparison states reweighted to match claim rate",
             "border, pre-period mean base": "Border: 140 pairs, equal weights", "border, population-weighted, premean": "Border: population-weighted",
             "border, population-weighted, no El Paso": "Border: population-weighted, no El Paso", "border, all-programs states only": "Border: all-program states only",
@@ -73,6 +73,7 @@ def main():
     ax.axvline(0, color=GREY, lw=.8); ax.axvspan(-0.67, -0.38, color=ORANGE, alpha=.18, lw=0)
     ax.text(-0.52, len(rows) - 0.3, "implied by\nCoombs et al.", color=ORANGE, fontsize=8, ha="center")
     ax.set_xlabel("Effect on card spending, log points (approximate 95% interval from the placebo distribution)"); ax.grid(axis="x", alpha=.12)
+    fig.text(0.01, -0.02, "All rows anchored to the average of weeks -8 to -2 before withdrawal unless the label says otherwise.", fontsize=7.5, color=MUTED)
     fig.tight_layout(); fig.savefig(FIG / "ui-withdrawal-specifications.png", dpi=180, bbox_inches="tight"); plt.close(fig)
 
     # Border event path

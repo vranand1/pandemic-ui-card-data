@@ -16,7 +16,7 @@ WP_SPEND_PER_WEEK = 145.0
 
 def run():
     df, st = load_state()
-    s = df[(df.week == "2021-05-29")]
+    s = df[(df.week == "2021-05-29") & (df.stateabbrev != "DC")]      # DC is outside the design (no card data)
     tr = s[s.treated]; nv = s[~s.treated]
     recipients = tr.contclaims_count_combined.sum()
     allpop = pd.read_csv(RAW / "GeoIDs_-_State.csv").state_pop2019.sum()      # all 50 states plus DC
@@ -25,6 +25,14 @@ def run():
     weekly_treated_cardable = cardable * pop_share / 52
     weekly_treated_pce = PCE_2021 * 1e9 * pop_share / 52
     lost = recipients * WP_SPEND_PER_WEEK
+    # who lost what on May 29: PUA and PEUC claimants in all-program states lost everything; regular-program
+    # claimants everywhere and all claimants in the five supplement-only states lost only the $300 FPUC supplement
+    u = pd.read_csv(RAW / "UI_Claims_-_State_-_Weekly.csv", na_values=".")
+    u["week"] = pd.to_datetime(dict(year=u.year, month=u.month, day=u.day_endofweek))
+    c = u[u.week == "2021-05-29"].merge(st, on="statefips"); c = c[c.treated]
+    allp, fp = c[c.kind == "all"], c[c.kind == "fpuc_only"]
+    share_only_supplement = (allp.contclaims_count_regular.sum() + fp.contclaims_count_combined.sum()) / c.contclaims_count_combined.sum()
+    share_in_fpuc_only_states = fp.contclaims_count_combined.sum() / c.contclaims_count_combined.sum()
     implied_cardable = 100 * lost / weekly_treated_cardable
     implied_pce = 100 * lost / weekly_treated_pce
     specs = pd.read_csv(OUT / "state_specs.csv").set_index("spec")
@@ -40,7 +48,8 @@ def run():
     meta = dict(recipients_may29=recipients, treated_pop_share=pop_share, lost_per_week_bn=lost / 1e9,
                 weekly_treated_cardable_bn=weekly_treated_cardable / 1e9, implied_pct_cardable=implied_cardable,
                 implied_pct_pce=implied_pce, wp_2bn_over_7wk_per_week_bn=2.0 / 7,
-                claims_per_100_treated=tr.contclaims_rate_combined.mean(), claims_per_100_control=nv.contclaims_rate_combined.mean())
+                claims_per_100_treated=tr.contclaims_rate_combined.mean(), claims_per_100_control=nv.contclaims_rate_combined.mean(),
+                share_lost_only_supplement=share_only_supplement, share_in_fpuc_only_states=share_in_fpuc_only_states)
     out.to_csv(OUT / "power.csv", index=False)
     pd.Series(meta).to_csv(OUT / "power_meta.csv")
     print(pd.Series(meta).round(3).to_string()); print(out.round(3).to_string(index=False))

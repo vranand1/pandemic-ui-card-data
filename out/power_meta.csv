@@ -7,4 +7,6 @@ implied_pct_cardable,0.6679568923441724
 implied_pct_pce,0.3798654699801405
 wp_2bn_over_7wk_per_week_bn,0.2857142857142857
 claims_per_100_treated,4.524416666666667
-claims_per_100_control,9.3236
+claims_per_100_control,9.349166666666667
+share_lost_only_supplement,0.49579348771454257
+share_in_fpuc_only_states,0.30015545709178815
