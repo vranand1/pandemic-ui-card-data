@@ -117,15 +117,6 @@ claim("faq mde", f"about {m(P.loc['state, pre-period mean base', 'mde_80'])} per
 claim("bottom line", f"spent {a(S.loc[HEAD, 'post_att'], 1)} to {a(S.loc[POPM, 'post_att'], 1)} percent less after the cut")
 claim("quick range", f"run from {s(S.loc[LOW, 'post_att'], 1)} to {m(S.loc[POPM, 'post_att'], 1)} log points depending on the comparison states")
 claim("quick border", f"estimate is {m(Bd.loc[BH, 'post_att'], 1)} to {m(Bd.loc[BPOP, 'post_att'], 1)} log points with wide intervals")
-# correction note (corrected values only; the old values are history)
-claim("corr pop", f"corrected {m(S.loc[POP, 'post_att'])})")
-claim("corr allp", f"corrected {m(S.loc[ALLP, 'post_att'])};")
-claim("corr fpuc", f"corrected {m(S.loc[FPUC, 'post_att'])};")
-claim("corr june", f"corrected {m(S.loc[JUNE, 'post_att'])})")
-claim("corr trend", f"corrected {s(S.loc[HEAD, 'trend_adj_post'])})")
-claim("corr covid", f"corrected {m(S.loc[COV, 'post_att'])})")
-claim("corr kernel", f"corrected {s(S.loc[KER, 'ci_lo'])} to {s(S.loc[KER, 'ci_hi'])}")
-claim("corr low", f"corrected {s(S.loc[LOW, 'post_att'])} for {i(S.loc[LOW, 'n_treated'])} against {i(S.loc[LOW, 'n_control'])}")
 # the null of every placebo distribution should be centered (the round-4 kernel bug would show here)
 off = S[S.null_mean.abs() > 0.1]
 assert off.empty, f"placebo null not centered: {off.null_mean.to_dict()}"

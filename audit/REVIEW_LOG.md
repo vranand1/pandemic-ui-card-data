@@ -36,9 +36,9 @@ All three applied. Kernel weights now rebuilt per permutation (sd 0.26, skewed n
 Tests table added (out/tests_vs_implied.csv): no comparison rejects zero or the implied effect. Louisiana
 corrected to "23 of the 24". check_post.py: 65 claims traced. Border pre-period slope (+0.37 per week) now stated.
 
-## Round 4 (independent outside referee with the full repository, Oct 17 to 18, 2026): grade B- (design B+, code C+)
+## Round 4 (independent outside referee with the full repository, Oct 17, 2026): grade B- (design B+, code C+)
 The referee reran run_all.sh (bit-for-bit match to the shipped outputs and figures), then found five errors in the
-estimator code and two wrong explanations in the post. All reproduced by the author and fixed on Oct 18:
+estimator code and two wrong explanations in the post. All reproduced by the author and fixed on Oct 17:
 1. Kernel-reweighted comparison: the permutation null was not skewed, it was shifted (mean +0.40, skewness
    -0.08). Pseudo-treated states drawn at random sit at the grand-mean claim rate while the kernel concentrates
    pseudo-controls on middle-exposure states, so every draw was biased up. Fix: permute within exposure

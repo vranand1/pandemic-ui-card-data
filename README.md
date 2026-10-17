@@ -38,9 +38,6 @@ spending data show that drop at the level of states and counties, and if not, wh
   headline from -0.31 to +0.08.
 - Border design: -0.92 (RI sd 0.73, p = 0.20); population-weighted (harmonic-mean pair weights, discounted for reuse) -1.31 (p = 0.01), -1.09 without El Paso, -0.96 with both counties under 500k; the county exposure split is uninformative (wrong measure, 74 pairs).
 - Implied effect: 0.38% to 0.67% of weekly spending in withdrawal states. MDE at 80% power: 0.75% (state, 0.85% population-weighted), 2.0% (border).
-- Round-4 corrections (Oct 18, 2026; see audit/REVIEW_LOG.md): cohort weights in the population-weighted
-  estimator, anchor defaults, trend extrapolation, two-way COVID adjustment, centered placebo for the
-  reweighted comparison. The headline, border and power numbers did not change.
 
 ## Audit (audit/)
 - `tests.py`: Monte Carlo on simulated staggered panels (bias of both estimators, RI coverage, a spurious
