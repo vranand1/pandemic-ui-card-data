@@ -71,8 +71,9 @@ assert round(S.loc[Q4, 'pre_minus1'], 1) == round(S.loc[INP, 'pre_minus1'], 1), 
 claim("in-person", f"would give {m(S.loc[INP, 'post_att'], 1)} with a small p-value")
 # border
 claim("n pairs", f"{len(pairs)} pairs on {pairs.segment.nunique()} state borders")
-claim("SC-NC", f"North Carolina ({(pairs.segment == 'SC-NC').sum()} pairs)")
-claim("IA-IL", f"Iowa and Illinois ({(pairs.segment == 'IA-IL').sum()})")
+seg = pairs.segment.value_counts()
+claim("SC-NC", f"from {seg['SC-NC']} on the South Carolina and North Carolina border to a single pair on several others")
+assert seg.idxmax() == "SC-NC" and seg.min() == 1 and (seg == 1).sum() > 2, "largest / single-pair borders changed; reword"
 claim("border", f"fell {a(Bd.loc[BH, 'post_att'])} log points relative to the retain side (standard deviation {a(Bd.loc[BH, 'ri_sd'])}, p = {m(Bd.loc[BH, 'ri_p'])}, interval {m(Bd.loc[BH, 'ci_lo'], 1)} to {s(Bd.loc[BH, 'ci_hi'], 1)})")
 claim("dd median", f"median pair fell {a(X.dd_median)} log points and {i(100 * X.dd_share_negative)} percent of pairs fell")
 claim("loo", f"between {m(X.loo_max, 1)} and {m(X.loo_min, 1)}")
@@ -88,6 +89,10 @@ claim("exposure split", f"gives {s(Bd.loc['border, high-exposure treated countie
 e3s = EV[(EV.spec == HEAD) & (EV.e == 3)].att.iloc[0]; e3b = BE[(BE.spec == BH) & (BE.e == 3)].att.iloc[0]
 assert round(e3s, 1) == round(e3b, 1), "state and border week +3 bumps no longer round alike; reword"
 claim("ctc bump", f"bump of {s(e3s, 1)} log points in event week +3")
+_g = pd.read_csv(ROOT / "out" / "state_panel.csv").drop_duplicates("stateabbrev")
+_g = _g[(_g.stateabbrev != "DC") & _g.treated]
+_e3 = pd.to_datetime(_g.g) + pd.Timedelta(weeks=3)
+claim("ctc states", f"for {int(_e3.between('2021-07-17', '2021-07-31').sum())} of the {len(_e3)} withdrawal states falls in the weeks ending July 17, 24 or 31")
 # power
 claim("recipients", f"About {m(M['recipients_may29'] / 1e6)} million people")
 claim("lost per week", f"{i(round(M['lost_per_week_bn'] * 1000, -1))} million a week")
@@ -110,13 +115,11 @@ for spec, lab in [(HEAD, "All 24 comparison states"), (POP, "Population-weighted
     est = s(r.est) if spec == LOW else m(r.est)
     claim(f"table {lab}", f"| {lab} | {est} | {s(r.ci_lo)} to {s(r.ci_hi)} | {flag(r, 'rejects_zero')} | {flag(r, 'rejects_implied_low')} | {flag(r, 'rejects_implied_high')} |")
 claim("table p", f"two-sided placebo p-value is {m(S.loc[POP, 'ri_p'])}")
-# summary lines (FAQ, bottom line, quick answers)
-claim("faq headline", f"about {a(S.loc[HEAD, 'post_att'], 1)} log points lower, and {a(S.loc[POP, 'post_att'], 1)} lower when states are weighted")
-claim("faq border", f"fell about {a(Bd.loc[BH, 'post_att'], 1)} log points relative to the retain side, {a(Bd.loc[BPOP, 'post_att'], 1)} when pairs are weighted")
+# summary lines (FAQ, bottom line)
+claim("faq headline", f"ran about {a(S.loc[HEAD, 'post_att'], 1)} percent lower, and {a(S.loc[POP, 'post_att'], 1)} percent lower when states are weighted")
+claim("faq border", f"fell about {a(Bd.loc[BH, 'post_att'], 1)} percent relative to the retain side, {a(Bd.loc[BPOP, 'post_att'], 1)} percent when pairs are weighted")
 claim("faq mde", f"about {m(P.loc['state, pre-period mean base', 'mde_80'])} percent, larger than")
 claim("bottom line", f"spent {a(S.loc[HEAD, 'post_att'], 1)} to {a(S.loc[POPM, 'post_att'], 1)} percent less after the cut")
-claim("quick range", f"run from {s(S.loc[LOW, 'post_att'], 1)} to {m(S.loc[POPM, 'post_att'], 1)} log points depending on the comparison states")
-claim("quick border", f"estimate is {m(Bd.loc[BH, 'post_att'], 1)} to {m(Bd.loc[BPOP, 'post_att'], 1)} log points with wide intervals")
 # the short version at the top
 claim("short head", f"ran about {a(S.loc[HEAD, 'post_att'], 1)} percent lower ({a(S.loc[POP, 'post_att'], 1)} percent when states are weighted by population)")
 claim("short implied", f"close to the {a(M['implied_pct_pce'], 1)} to {a(M['implied_pct_cardable'], 1)} percent the bank data imply")
