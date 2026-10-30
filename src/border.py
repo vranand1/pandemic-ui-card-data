@@ -63,8 +63,7 @@ def build_pairs(st, W, geo, adj):
 def pair_weights(pr, pop):
     """Harmonic mean of the two counties' populations, divided by the geometric mean of the number of pairs each
     county appears in, so a county paired with several neighbors does not enter each time at full weight.
-    Reuse is counted over the whole pair table passed in (round-4 fix: counting within cohort missed four control
-    counties that border treated counties in two cohorts)."""
+    Reuse is counted over the whole pair table passed in, including counties bordering treated counties in multiple cohorts."""
     pt, pc = pr.t_fips.map(pop).astype(float), pr.c_fips.map(pop).astype(float)
     hm = 2 * pt * pc / (pt + pc)
     reuse = pr.t_fips.map(pr.t_fips.value_counts()) * pr.c_fips.map(pr.c_fips.value_counts())

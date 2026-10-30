@@ -70,8 +70,9 @@ def main():
     for i, (lab, b, lo, hi, c) in enumerate(rows[::-1]):
         ax.errorbar(b, i, xerr=[[b - lo], [hi - b]], fmt="o", color=c, ms=5, capsize=3, lw=1.2)
     ax.set_yticks(range(len(rows))); ax.set_yticklabels([r[0] for r in rows[::-1]], fontsize=8)
+    ax.set_ylim(-0.7, len(rows) + 0.9)
     ax.axvline(0, color=GREY, lw=.8); ax.axvspan(-0.67, -0.38, color=ORANGE, alpha=.18, lw=0)
-    ax.text(-0.52, len(rows) - 0.3, "implied by\nCoombs et al.", color=ORANGE, fontsize=8, ha="center")
+    ax.text(-0.525, len(rows) - 0.2, "implied by\nCoombs et al.", color=ORANGE, fontsize=8, ha="center", va="bottom")
     ax.set_xlabel("Effect on card spending, log points (approximate 95% interval from the placebo distribution)"); ax.grid(axis="x", alpha=.12)
     fig.text(0.01, -0.02, "All rows anchored to the average of weeks -8 to -2 before withdrawal unless the label says otherwise.", fontsize=7.5, color=MUTED)
     fig.tight_layout(); fig.savefig(FIG / "ui-withdrawal-specifications.png", dpi=180, bbox_inches="tight"); plt.close(fig)

@@ -1,4 +1,4 @@
-"""State-level staggered DiD with the robustness set a referee would ask for.
+"""State-level staggered DiD across headline and robustness specifications.
 Outputs: out/state_specs.csv (one row per specification), out/state_event.csv (event-time paths)."""
 import numpy as np, pandas as pd
 from common import *
@@ -84,8 +84,7 @@ def run():
         controls = [c for c in controls if c not in drop_controls]
         if covid_adj:
             # partial out the contemporaneous new COVID case rate with state AND week fixed effects (two-way within
-            # transformation). Round-4 fix: with state effects alone the slope was positive, because both spending and
-            # Delta cases rose from spring to late summer, and the adjustment pushed the estimate the wrong way.
+            # transformation) so common spring-to-summer trends in spending and Delta cases do not confound the slope.
             C = wide(df, "new_case_rate").reindex(W.index)[W.columns]
             def tw(X):
                 X = X - X.mean(axis=1).values[:, None]

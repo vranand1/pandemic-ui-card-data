@@ -70,8 +70,7 @@ def att_gt(W, cohorts, controls, base="premean", weights=None, emin=-12, emax=8)
     base: 'premean' (mean of event weeks -8 to -2), 'g-1' (week before treatment) or a Timestamp (fixed calendar week).
     Returns a long frame of ATT(g, e) with the cohort weight n used by `aggregate`: the number of treated units with
     data in that week, or, when `weights` is given, the sum of their weights. Weighting across cohorts by the same
-    weights used within cohorts is what makes a population-weighted estimate population-weighted (round-4 fix:
-    the earlier code weighted across cohorts by the count of states, so Alabama outweighed Florida).
+    weights used within cohorts preserves population weighting at the aggregate level.
     Units with no data at all in W are dropped from both groups."""
     rows = []
     has_data = set(W.index[W.notna().any(axis=1)])
@@ -117,7 +116,7 @@ def base_values(W, g, base, m, controls, pre_lo=-8, pre_hi=-2):
 
 
 def _wmean(d, w):
-    """Weighted column means, normalizing weights only over non-missing entries (fixes the DC bug)."""
+    """Weighted column means, normalizing weights only over non-missing entries."""
     w = w.astype(float)
     num = d.mul(w, axis=0).sum(min_count=1)
     den = d.notna().mul(w, axis=0).sum()
@@ -140,10 +139,8 @@ def pretrend_slope(ev, emin=-8, emax=-1):
 def linear_trend_adjusted_post(ev, slope=None, emin=-8, emax=-1):
     """Post average after subtracting the straight line fitted to the pre-period path on event weeks emin..emax
     (Dobkin et al. 2018 style, one of several bounds). The line carries its own intercept, so the result does not
-    depend on where the series is anchored. Round-4 fix: the earlier version subtracted slope * (e + 1), which
-    assumes the path is zero at e = -1 and is only right for the g-1 anchor; under the pre-period mean anchor
-    (centered at e = -5) it removed five ninths of a linear trend. `slope` is accepted for backward compatibility
-    and ignored; the slope is refitted on the same window."""
+    depend on where the series is anchored. `slope` is accepted for backward compatibility and ignored; the slope
+    is refitted on the same window."""
     x = np.array([e for e in ev.index if emin <= e <= emax], dtype=float); y = ev.reindex(x.astype(int)).values
     xbar, ybar = x.mean(), y.mean()
     b = float(((x - xbar) * (y - ybar)).sum() / ((x - xbar) ** 2).sum())
@@ -174,7 +171,7 @@ def stratified_randomization_inference(stat_fn, cohorts, controls, strata, B=100
     """Reassign cohorts at random WITHIN strata, keeping each cohort's count in each stratum. Use this when the
     estimator conditions on a unit characteristic (here the May 29 claim rate): an unstratified permutation gives
     pseudo-treated groups whose exposure sits at the grand mean, and a statistic that reweights comparison units
-    toward the treated mean is then not centered at zero under the sharp null (round-4 fix, referee error 1).
+    toward the treated mean is then not centered at zero under the sharp null.
     strata: Series unit -> stratum label."""
     rng = np.random.default_rng(seed)
     real = {u: g for g, m in cohorts.items() for u in m}

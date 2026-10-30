@@ -64,8 +64,7 @@ def true_post_att(truth, coh):
 def mc_state(R=120, tau=-1.0, base="premean", pretrend=0.0, n_ri=30, B=150):
     """Bias and sd of the estimator, and either the size of the randomization test (tau = 0) or the coverage of the
     95% randomization interval (tau != 0). For coverage the null is built from the panel with the imposed effect
-    removed (W0), which is what a test of the sharp null 'effect = truth' permutes. Round-4 fix: permuting the panel
-    with the effect still in it inflated the null and reported 100% coverage.
+    removed (W0), which is what a test of the sharp null 'effect = truth' permutes.
     Note: for an additive effect and this linear estimator, est - truth does not depend on tau, so the bias and sd
     lines for tau = -1 and tau = 0 coincide by construction; the pre-trend line is the informative bias check."""
     errs, covers, pvals = [], [], []
@@ -114,8 +113,8 @@ def ols_cohort_att(df, st, y="y_spend_all", pre=(-8, -2), post=(0, 8), weights=N
     """For each cohort g: OLS (or WLS with state weights) of y on unit FE + week FE + D (treated x post) using cohort
     g and never-treated states, restricted to event weeks in the pre and post windows. Then average cohort ATTs
     with the same (g, e) cell weighting as `aggregate`: the number (or weight sum) of treated states with data,
-    times the number of post weeks. Round-4 change: states with no data for y are excluded from the cohort count,
-    and the weighted version is run so the population-weighted estimator is checked too."""
+    times the number of post weeks. States with no data for y are excluded from the cohort count, and the weighted
+    version verifies the population-weighted estimator as well."""
     cohorts, controls = design(st)
     rows = []
     for g, m in cohorts.items():

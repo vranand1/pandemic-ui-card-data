@@ -1,7 +1,6 @@
 """Every number in the post must trace to an output file. Each claim takes the value from the CSV, formats it
 the way the post writes it, and asserts that the formatted text appears in the post. If an output changes, the
-formatted text changes and the check fails. (The earlier version only tested that a hardcoded string was
-present in the post, which the round-4 referee rightly called theatrical.)"""
+formatted text changes and the check fails."""
 import sys, pandas as pd
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
@@ -124,7 +123,7 @@ claim("bottom line", f"spent {a(S.loc[HEAD, 'post_att'], 1)} to {a(S.loc[POPM, '
 claim("short head", f"ran about {a(S.loc[HEAD, 'post_att'], 1)} percent lower ({a(S.loc[POP, 'post_att'], 1)} percent when states are weighted by population)")
 claim("short implied", f"close to the {a(M['implied_pct_pce'], 1)} to {a(M['implied_pct_cardable'], 1)} percent the bank data imply")
 claim("short mde", f"could reliably detect is about {a(P.loc['state, pre-period mean base', 'mde_80'])} percent, larger than the effect itself")
-# the null of every placebo distribution should be centered (the round-4 kernel bug would show here)
+# the null of every placebo distribution should be centered near zero
 off = S[S.null_mean.abs() > 0.1]
 assert off.empty, f"placebo null not centered: {off.null_mean.to_dict()}"
 
