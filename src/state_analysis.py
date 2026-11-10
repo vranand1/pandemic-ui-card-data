@@ -4,6 +4,8 @@ import numpy as np, pandas as pd
 from common import *
 from state_panel import load_state
 
+log = get_logger("state_analysis")
+
 B_RI = 1000
 
 
@@ -92,7 +94,7 @@ def run():
             Wt, Ct = tw(W), tw(C)
             b = np.nansum((Wt * Ct).values) / np.nansum((Ct ** 2).values)
             W = W - b * C
-            print(f"   COVID slope (state and week effects): {b:+.6f} log points per new case per 100,000")
+            log.info(f"   COVID slope (state and week effects): {b:+.6f} log points per new case per 100,000")
         ev, post, pre = one_spec(W, cohorts, controls, base=base, weights=weights)
         slope = pretrend_slope(ev)
         pre_far = float(np.mean([ev[e] for e in ev.index if -12 <= e <= -9]))   # weeks outside the anchor window
@@ -103,7 +105,7 @@ def run():
                           pre_minus1=float(ev.get(-1, np.nan)), pre_slope=slope, trend_adj_post=linear_trend_adjusted_post(ev)))
         for e, v in ev.items():
             paths.append(dict(spec=name, e=e, att=v))
-        print(f"{name:46s} post={post:6.2f} ri_sd={sd:5.2f} p={p:4.2f} null_mean={null_mean:5.2f} pre={pre:6.2f} slope={slope:6.3f}/wk trend_adj={linear_trend_adjusted_post(ev):6.2f}")
+        log.info(f"{name:46s} post={post:6.2f} ri_sd={sd:5.2f} p={p:4.2f} null_mean={null_mean:5.2f} pre={pre:6.2f} slope={slope:6.3f}/wk trend_adj={linear_trend_adjusted_post(ev):6.2f}")
 
     # first stage (mechanical drop in claims at e = 0; anchored on the week before withdrawal, as labeled)
     add("claims, g-1 base", "y_claims", base="g-1")
@@ -143,7 +145,7 @@ def run():
     dose = dict(slope=fit.params["exposure"], se=fit.bse["exposure"], corr=dz[["att", "exposure"]].corr().iloc[0, 1], n=len(dz),
                 low_half_att=dz[dz.exposure <= dz.exposure.median()].att.mean(), high_half_att=dz[dz.exposure > dz.exposure.median()].att.mean())
     pd.Series(dose).to_csv(OUT / "state_dose.csv"); dz.to_csv(OUT / "state_dose_points.csv", index=False)
-    print("dose test:", {k: round(v, 3) for k, v in dose.items()})
+    log.info("dose test: %s", {k: round(v, 3) for k, v in dose.items()})
     # tests against zero and against the implied effect (0.40 lower, 0.67 upper bound), by test inversion plus normal approximation
     from scipy.stats import norm
     S = pd.DataFrame(specs).set_index("spec"); rows = []

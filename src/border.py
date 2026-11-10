@@ -11,12 +11,15 @@ Exposure heterogeneity: counties split by the regular initial UI claims rate in 
 import numpy as np, pandas as pd
 from common import *
 
+log = get_logger("border")
+
 EMIN, EMAX = -10, 8
 
 
 def load_counties():
-    geo = pd.read_csv(RAW / "GeoIDs_-_County.csv")
-    a = pd.read_csv(RAW / "Affinity_-_County_-_Daily.csv", na_values=".")
+    geo = read_raw_csv(RAW / "GeoIDs_-_County.csv", ["countyfips"])
+    a = read_raw_csv(RAW / "Affinity_-_County_-_Daily.csv", ["countyfips", "year", "month", "day", "freq", "spend_all"],
+                     na_values=".")
     a = a[a.freq == "d"]
     sp = weekly_from_daily(a, "countyfips", ["spend_all"])
     sp = sp[(sp.week >= START) & (sp.week <= STOP)]
@@ -24,7 +27,8 @@ def load_counties():
     W = sp.pivot(index="countyfips", columns="week", values="y")
     # keep counties with a complete, finite series (one county reports spend_all = -1.0 for a week, which logs to -inf)
     W = W.replace([np.inf, -np.inf], np.nan).dropna()
-    u = pd.read_csv(RAW / "UI_Claims_-_County_-_Weekly.csv", na_values=".")
+    u = read_raw_csv(RAW / "UI_Claims_-_County_-_Weekly.csv",
+                     ["countyfips", "year", "month", "day_endofweek", "initclaims_rate_regular"], na_values=".")
     u["week"] = pd.to_datetime(dict(year=u.year, month=u.month, day=u.day_endofweek))
     expo = u[(u.week >= "2021-03-01") & (u.week <= "2021-05-29")].groupby("countyfips").initclaims_rate_regular.mean()
     geo = geo.set_index("countyfips")
@@ -33,7 +37,10 @@ def load_counties():
 
 def adjacency():
     rows, cur = [], None
-    for line in open(RAW / "county_adjacency.txt", encoding="latin-1"):
+    path = RAW / "county_adjacency.txt"
+    if not path.exists():
+        raise DataError(f"{path.name} not found in {path.parent}. Run ./get_data.sh first.")
+    for line in open(path, encoding="latin-1"):
         p = line.rstrip("\n").split("\t")
         if p[0]:
             cur = int(p[1])
@@ -126,8 +133,8 @@ def run(B_ri=1000, B_boot=999):
     adj = adjacency()
     pr = build_pairs(st, W, geo, adj)
     pop = geo.county_pop2019.astype(float)
-    print(f"pairs {len(pr)} | treated counties {pr.t_fips.nunique()} | control counties {pr.c_fips.nunique()} | segments {pr.segment.nunique()}")
-    print(pr.groupby("segment").size().sort_values(ascending=False).head(12).to_dict())
+    log.info(f"pairs {len(pr)} | treated counties {pr.t_fips.nunique()} | control counties {pr.c_fips.nunique()} | segments {pr.segment.nunique()}")
+    log.info("%s", pr.groupby("segment").size().sort_values(ascending=False).head(12).to_dict())
 
     results, paths = [], []
 
@@ -151,7 +158,7 @@ def run(B_ri=1000, B_boot=999):
                             pre_slope=slope, trend_adj_post=linear_trend_adjusted_post(ev)))
         for e, v in ev.items():
             paths.append(dict(spec=name, e=e, att=v))
-        print(f"{name:40s} post={post:6.2f} boot_se={bs.std(ddof=1):5.2f} ri_sd={sd_ri:5.2f} ri_p={p_ri:4.2f} pre={pre:6.2f} slope={slope:6.3f}")
+        log.info(f"{name:40s} post={post:6.2f} boot_se={bs.std(ddof=1):5.2f} ri_sd={sd_ri:5.2f} ri_p={p_ri:4.2f} pre={pre:6.2f} slope={slope:6.3f}")
 
     all_programs = lambda p, s: p[p.t_state.map(s.set_index("stateabbrev").kind) == "all"]
     june = lambda p, s: p[p.g <= "2021-07-03"]
@@ -194,7 +201,7 @@ def run(B_ri=1000, B_boot=999):
     pd.DataFrame(paths).to_csv(OUT / "border_event.csv", index=False)
     pr.to_csv(OUT / "border_pairs.csv", index=False)
     pd.DataFrame([extras]).to_csv(OUT / "border_extras.csv", index=False)
-    print({k: round(v, 3) for k, v in extras.items()})
+    log.info("%s", {k: round(v, 3) for k, v in extras.items()})
     return res
 
 

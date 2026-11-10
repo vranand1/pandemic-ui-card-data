@@ -10,6 +10,8 @@ import numpy as np, pandas as pd
 from common import *
 from state_panel import load_state
 
+log = get_logger("power")
+
 PCE_2021, HOUSING, HEALTH, FIN = 16216.0, 2897.0, 2850.0, 1247.0      # $bn, BEA 2021 annual
 WP_SPEND_PER_WEEK = 145.0
 
@@ -19,7 +21,7 @@ def run():
     s = df[(df.week == "2021-05-29") & (df.stateabbrev != "DC")]      # DC is outside the design (no card data)
     tr = s[s.treated]; nv = s[~s.treated]
     recipients = tr.contclaims_count_combined.sum()
-    allpop = pd.read_csv(RAW / "GeoIDs_-_State.csv").state_pop2019.sum()      # all 50 states plus DC
+    allpop = read_raw_csv(RAW / "GeoIDs_-_State.csv", ["state_pop2019"]).state_pop2019.sum()      # all 50 states plus DC
     pop_share = tr.state_pop2019.sum() / allpop
     cardable = (PCE_2021 - HOUSING - HEALTH - FIN) * 1e9
     weekly_treated_cardable = cardable * pop_share / 52
@@ -27,7 +29,9 @@ def run():
     lost = recipients * WP_SPEND_PER_WEEK
     # who lost what on May 29: PUA and PEUC claimants in all-program states lost everything; regular-program
     # claimants everywhere and all claimants in the five supplement-only states lost only the $300 FPUC supplement
-    u = pd.read_csv(RAW / "UI_Claims_-_State_-_Weekly.csv", na_values=".")
+    u = read_raw_csv(RAW / "UI_Claims_-_State_-_Weekly.csv",
+                     ["statefips", "year", "month", "day_endofweek", "contclaims_count_regular",
+                      "contclaims_count_combined"], na_values=".")
     u["week"] = pd.to_datetime(dict(year=u.year, month=u.month, day=u.day_endofweek))
     c = u[u.week == "2021-05-29"].merge(st, on="statefips"); c = c[c.treated]
     allp, fp = c[c.kind == "all"], c[c.kind == "fpuc_only"]
@@ -52,7 +56,7 @@ def run():
                 share_lost_only_supplement=share_only_supplement, share_in_fpuc_only_states=share_in_fpuc_only_states)
     out.to_csv(OUT / "power.csv", index=False)
     pd.Series(meta).to_csv(OUT / "power_meta.csv")
-    print(pd.Series(meta).round(3).to_string()); print(out.round(3).to_string(index=False))
+    log.info("\n%s", pd.Series(meta).round(3).to_string()); log.info("\n%s", out.round(3).to_string(index=False))
     return out, meta
 
 

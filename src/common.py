@@ -7,6 +7,9 @@ South Carolina (June 30) is missing from the OI file and comes from NELP.
 import numpy as np, pandas as pd
 from pathlib import Path
 
+from checks import DataError, read_raw_csv, check_unique, check_count
+from logsetup import get_logger
+
 ROOT = Path(__file__).resolve().parents[1]
 RAW, OUT, FIG = ROOT / "data" / "raw", ROOT / "out", ROOT / "fig"
 OUT.mkdir(exist_ok=True); FIG.mkdir(exist_ok=True)
@@ -37,11 +40,12 @@ def first_treated_week(end_date):
 
 
 def state_table():
-    geo = pd.read_csv(RAW / "GeoIDs_-_State.csv")
+    geo = read_raw_csv(RAW / "GeoIDs_-_State.csv", ["statefips", "stateabbrev", "state_pop2019"])
     geo = geo[~geo.stateabbrev.isin(DROP)].copy()
     geo["g"] = geo.stateabbrev.map(lambda s: first_treated_week(END[s][0]) if s in END else pd.NaT)
     geo["kind"] = geo.stateabbrev.map(lambda s: END[s][1] if s in END else "never")
     geo["treated"] = geo.g.notna()
+    check_count(int(geo.treated.sum()), len(END), "treated states found in GeoIDs")
     return geo
 
 

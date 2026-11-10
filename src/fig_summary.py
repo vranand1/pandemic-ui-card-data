@@ -4,7 +4,9 @@ import pandas as pd, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
-from common import OUT, FIG
+from common import OUT, FIG, get_logger
+
+log = get_logger("fig_summary")
 
 SURFACE, INK, INK2, MUTED, GRID = "#181818", "#f0efec", "#c3c2b7", "#8f8e88", "#2c2c2a"
 BLUE, AQUA, ORANGE = "#3987e5", "#199e70", "#d95926"      # validated dark-mode categorical slots
@@ -87,7 +89,7 @@ def main():
              " DOL claims); Coombs et al. (2021). vranand1.github.io", fontsize=7, color=MUTED, va="bottom")
     fig.savefig(FIG / "ui-withdrawal-summary.png", facecolor=SURFACE, dpi=220)
     plt.close(fig)
-    print("summary figure written")
+    log.info("summary figure written")
 
 
 if __name__ == "__main__":
