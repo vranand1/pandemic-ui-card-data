@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # Reproduces every number, chart and audit result. About 25 minutes.
-set -e
+set -euo pipefail
 cd "$(dirname "$0")"
+mkdir -p out
+export LOG_FILE="$PWD/out/run.log"   # every script appends to one log of the run
+: > "$LOG_FILE"
 bash get_data.sh
 cd src
 python3 state_panel.py

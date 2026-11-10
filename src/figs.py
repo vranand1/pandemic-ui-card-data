@@ -8,6 +8,8 @@ from state_panel import load_state
 from state_analysis import wide, design
 import border as Bd
 
+log = get_logger("figs")
+
 BG, FG, MUTED, BLUE, ORANGE, GREY, GREEN = "#181818", "#e5e7eb", "#9ca3af", "#79b8ff", "#f59e0b", "#6b7280", "#34d399"
 plt.rcParams.update({"figure.facecolor": BG, "axes.facecolor": BG, "savefig.facecolor": BG, "text.color": FG,
                      "axes.labelcolor": FG, "xtick.color": MUTED, "ytick.color": MUTED, "axes.edgecolor": GREY,
@@ -110,7 +112,7 @@ def main():
         ax.text(v + 0.03, i, f"{v:.2f}%", va="center", color=FG)
     ax.invert_yaxis(); ax.set_xlim(0, max(vals) * 1.2); ax.set_xlabel("Percent of weekly spending in withdrawal states"); ax.grid(axis="x", alpha=.12)
     fig.tight_layout(); fig.savefig(FIG / "ui-withdrawal-power.png", dpi=180, bbox_inches="tight"); plt.close(fig)
-    print("figures written")
+    log.info("figures written")
 
 
 if __name__ == "__main__":

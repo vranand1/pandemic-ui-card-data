@@ -1,5 +1,7 @@
 # Early withdrawal of pandemic unemployment benefits: what public card data can and can't see
 
+[![tests](https://github.com/vranand1/pandemic-ui-card-data/actions/workflows/tests.yml/badge.svg)](https://github.com/vranand1/pandemic-ui-card-data/actions/workflows/tests.yml)
+
 An aggregate test of the spending effects in Coombs, Dube, Jahnke, Kluender, Naidu and Stepner,
 "Early Withdrawal of Pandemic Unemployment Insurance" (working paper, Aug 2021; employment and earnings
 results published in AEA Papers and Proceedings 112, 2022), using public state- and county-level card data.
@@ -47,9 +49,27 @@ spending data show that drop at the level of states and counties, and if not, wh
 - `check_post.py`: formats each number the post quotes from the output files and asserts the formatted text appears in the post, so a changed output fails the check (the remaining prose numbers are citations to Coombs et al.).
 - `audit_report.txt`: the log from the last run.
 
+## Running it
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt pytest
+pytest            # unit tests, about a second, no downloads
+./run_all.sh      # full reproduction, about 25 minutes; log in out/run.log
+```
+- `tests/` holds fast known-answer tests of the estimators (exact recovery of an imposed effect on noise-free
+  panels, invariances of the trend adjustment, cohort-size and stratum-count preservation in randomization
+  inference) and of the input checks. They run in CI on every push (Python 3.11 to 3.13).
+- Raw inputs are checked when read (`src/checks.py`): a missing, empty or reshaped upstream file, a duplicated
+  state-week row, or a change in the number of treated states stops the run with a `DataError` that names the
+  file and the fix, instead of surfacing later as an all-NaN panel.
+- Every script logs through one format (`src/logsetup.py`); `run_all.sh` collects the run in `out/run.log`.
+  Downloads retry three times and fail on empty files.
+
 ## Files
 - `get_data.sh`: downloads the Opportunity Insights files and the Census county adjacency file.
 - `src/common.py`: treatment dates, estimators, randomization inference.
+- `src/checks.py`, `src/logsetup.py`: input checks and logging.
+- `tests/`: unit tests (pytest); `.github/workflows/tests.yml`: CI.
 - `src/state_panel.py`, `src/state_analysis.py`: state panel and specification grid.
 - `src/border.py`: county pairs, border estimator, exposure split.
 - `src/power.py`: implied effect and minimum detectable effects.
